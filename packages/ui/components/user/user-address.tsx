@@ -17,7 +17,7 @@ export function UserAddress(): ReactElement {
 
   return (
     <div className="">
-      {!address ? null : (
+      {address ? (
         <div className="py-2">
           <div className="py-1">
             <div className="text-sm text-gray-600 font-light">Country</div>
@@ -39,6 +39,10 @@ export function UserAddress(): ReactElement {
             <div className="text-sm text-gray-600 font-light">Postal Code</div>
             <div className=" font-semibold">{address.postalCode}</div>
           </div>
+        </div>
+      ) : (
+        <div className="flex h-96 items-center justify-center">
+          Address not available, Please update the profile
         </div>
       )}
     </div>

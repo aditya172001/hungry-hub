@@ -24,7 +24,11 @@ export function UserOrders(): ReactElement {
             return <IndividualOrder key={index} order={order} />;
           })}
         </div>
-      ) : null}
+      ) : (
+        <div className="flex h-96 items-center justify-center">
+          No order history available, Order some food.
+        </div>
+      )}
     </div>
   );
 }

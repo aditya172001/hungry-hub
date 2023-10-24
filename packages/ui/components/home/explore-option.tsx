@@ -17,17 +17,21 @@ export async function ExploreOptions(): Promise<ReactElement> {
   const rawCities: string[] = rawRestaurants.map(
     (restaurant) => restaurant.address.city
   );
-  const distinctCities = [
-    ...new Set(
-      rawCities.map((city) =>
-        city
-          .toLowerCase()
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      )
-    ),
-  ].slice(0, 6);
+  const distinctCities = rawCities
+    .map((city) =>
+      city
+        .toLowerCase()
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ")
+    )
+    .reduce((uniqueCities: string[], city) => {
+      if (!uniqueCities.includes(city)) {
+        uniqueCities.push(city);
+      }
+      return uniqueCities;
+    }, [])
+    .slice(0, 6);
 
   //get 6 dishes
   const rawDishes = await Item.find();
@@ -37,10 +41,10 @@ export async function ExploreOptions(): Promise<ReactElement> {
 
   return (
     <div className="px-48 py-10 space-y-4">
-      <div className="text-2xl">Explore options near me</div>
-      <MyAccordian title="Popular cuisines near me" contents={dishes} />
-      <MyAccordian title="Popular restaurants near me" contents={restaurnts} />
-      <MyAccordian title="Cities We Deliver To" contents={distinctCities} />
+      <div className="text-2xl">Explore options</div>
+      <MyAccordian title="Popular cuisines" contents={dishes} />
+      <MyAccordian title="Popular restaurants" contents={restaurnts} />
+      <MyAccordian title="Cities we deliver to" contents={distinctCities} />
     </div>
   );
 }
