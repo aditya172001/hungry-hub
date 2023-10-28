@@ -6,6 +6,7 @@ import { validateUserSession } from "../../validateUserSession";
 import { restaurantSchema } from "validation";
 import { RestaurantInfoType } from "types";
 
+//api currently not in use
 //get general info of all restaurants of the user
 export async function GET(request: NextRequest) {
   try {

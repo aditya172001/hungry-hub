@@ -159,6 +159,7 @@ export async function PUT(request: NextRequest, context: any) {
   }
 }
 
+//api current not in use
 //DELETE a restaurant
 export async function DELETE(request: NextRequest, context: any) {
   try {

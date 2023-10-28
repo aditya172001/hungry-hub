@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Restaurant, ensureDbConnection } from "db";
 import { restaurantIdSchema } from "validation";
 
-//api not being used anywhere
+//api currently not in use
 //get more info about a specific restaurant including menu
 export async function GET(request: NextRequest, context: any) {
   try {
