@@ -3,7 +3,7 @@ import { ensureDbConnection, User, Address } from "db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { validateUserSession } from "../validateUserSession";
-import { userSchema } from "validation";
+import { addressType, userSchema } from "validation";
 
 //user to get user info
 export async function GET(request: NextRequest) {
@@ -36,13 +36,6 @@ interface UserDataType {
   userType?: string;
   address?: string;
 }
-interface AddressType {
-  street: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  country: string;
-}
 
 //update user profile info
 export async function PUT(request: NextRequest) {
@@ -71,7 +64,7 @@ export async function PUT(request: NextRequest) {
 
     if (address) {
       const { street, city, state, postalCode, country } = address;
-      let updatedAddress: AddressType = {
+      let updatedAddress: addressType = {
         street,
         city,
         state,

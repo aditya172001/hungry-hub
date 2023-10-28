@@ -36,6 +36,7 @@ export async function GET(request: NextRequest) {
         orderStatus: order.orderStatus,
         paymentStatus: order.paymentStatus,
         deliveryAddress: order.deliveryAddress,
+        orderDateTime: order.orderDateTime,
       };
     });
 

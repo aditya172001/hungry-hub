@@ -3,7 +3,7 @@ export * from "./owner-restaurant-card";
 export * from "./view-star-rating";
 export * from "./single-restaurant-profile-header";
 export * from "./menu";
-export * from "./edit-modal";
+export * from "./modal-delete-item-from-menu";
 export * from "./form-register-restaurant";
 export * from "./form-update-restaurant";
 export * from "./form-add-item";

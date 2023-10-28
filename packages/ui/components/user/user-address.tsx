@@ -3,17 +3,31 @@ import axios from "axios";
 import { ReactElement } from "react";
 import useSWR from "swr";
 import { addressType } from "validation";
+import Image from "next/image";
 
 function fetcher() {
   return axios.get("/api/user").then((response) => response.data.user.address);
 }
 
-export function UserAddress(): ReactElement {
+export function UserAddress({ spinner }: { spinner: string }): ReactElement {
   const {
     data: address,
     error,
     isLoading,
   } = useSWR<addressType>("/api/user", fetcher);
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <Image
+          src={spinner}
+          height={100}
+          width={100}
+          alt="spinner"
+          className=" w-16"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="">

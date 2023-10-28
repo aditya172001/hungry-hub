@@ -55,11 +55,11 @@ export function FormUpdateUser({
       });
       toast.success(`${response.data.message}`, {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
+        autoClose: 1500,
       });
       setTimeout(() => {
         router.push("/profile");
-      }, 3000);
+      }, 1800);
     } catch (error: any) {
       console.error(error);
       if (error?.response?.data !== undefined) {

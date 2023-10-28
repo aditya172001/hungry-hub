@@ -25,48 +25,7 @@ export default async function Profile() {
         buttonLink="/profile/update"
         bgImageLink="/user-profile-bg.jpg"
       />
-      <ProfileBody />
+      <ProfileBody spinner="/tail-spin.svg" />
     </div>
   );
 }
-
-// async function getUserData(): Promise<userType | "error"> {
-//   try {
-//     await ensureDbConnection();
-//     const session = await getServerSession(authOptions);
-//     const user = await validateUserSession(session);
-//     await user.populate("address");
-//     return user;
-//   } catch (error) {
-//     console.error(error);
-//     return "error";
-//   }
-// }
-
-// async function getOrderHistoryData(): Promise<OrderType[] | "error"> {
-//   try {
-//     await ensureDbConnection();
-//     const session = await getServerSession(authOptions);
-//     const user = await validateUserSession(session);
-//     let orders = await Order.find({ user: user._id }).populate([
-//       "items",
-//       "deliveryAddress",
-//       "restaurant",
-//     ]);
-//     let myOrders: OrderType[] = orders.map((order) => {
-//       return {
-//         orderID: order._id,
-//         restaurantName: order.restaurant.restaurantName,
-//         restaurantProfilePicture: order.restaurant.profilePicture,
-//         items: order.items,
-//         orderStatus: order.orderStatus,
-//         paymentStatus: order.paymentStatus,
-//         deliveryAddress: order.deliveryAddress,
-//       };
-//     });
-//     return myOrders;
-//   } catch (error) {
-//     console.error(error);
-//     return "error";
-//   }
-// }

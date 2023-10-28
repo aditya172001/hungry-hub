@@ -18,6 +18,18 @@ export interface OrderType {
   orderStatus: orderStatusType;
   paymentStatus: paymentStatusType;
   deliveryAddress: addressType;
+  orderDateTime: string;
+}
+
+export interface ReviewType {
+  reviewID: string;
+  restaurantName: string;
+  restaurantProfilePicture: string;
+  items: itemPutType[];
+  rating: number;
+  reviewText: string | undefined;
+  deliveryAddress: addressType;
+  reviewDateTime: string;
 }
 
 export interface RestaurantInfoType {

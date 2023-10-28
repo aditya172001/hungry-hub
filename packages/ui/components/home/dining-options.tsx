@@ -43,7 +43,7 @@ export function DiningOption({
 
   return (
     <div
-      className="bg-white rounded-md transition-transform duration-300 hover:scale-110"
+      className="bg-purple-50 rounded-md transition-transform duration-300 hover:scale-110"
       onClick={handleClick}
     >
       <Image

@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { RecoilContextProvider } from "./recoilContextProvider";
+import { TransparentBackground } from "ui";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <RecoilContextProvider>{children}</RecoilContextProvider>
+        <RecoilContextProvider>
+          <TransparentBackground>{children}</TransparentBackground>
+        </RecoilContextProvider>
       </body>
     </html>
   );

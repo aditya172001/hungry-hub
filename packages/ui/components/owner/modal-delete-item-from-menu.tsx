@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-export function EditModal({
+export function DeleteItemFromMenuModal({
   itemID,
   restaurantID,
 }: {
@@ -30,13 +30,11 @@ export function EditModal({
       await axios.delete("/api/owner/restaurants/menu", {
         headers: { itemID, restaurantID },
       });
+      router.refresh();
       toast.success("Item Delted Successfully !", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
-      setTimeout(() => {
-        router.refresh();
-      }, 2000);
     } catch (error) {
       console.error(error);
       toast.error("Couldn't delete item !", {

@@ -3,7 +3,12 @@ import { ensureDbConnection, Item, Order, Restaurant, User } from "db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { validateUserSession } from "../../validateUserSession";
-import { orderStatusType, paymentStatusType, orderSchema } from "validation";
+import {
+  orderStatusType,
+  paymentStatusType,
+  orderSchema,
+  userType,
+} from "validation";
 
 interface OrderType {
   user: string;
@@ -22,6 +27,17 @@ export async function POST(request: NextRequest) {
     //get current user
     const session = await getServerSession(authOptions);
     const myUser = await validateUserSession(session);
+
+    //if users address is not updated in db return 404 error
+    if (!myUser.address) {
+      return NextResponse.json(
+        {
+          status: "error",
+          message: "Address not found. Please update user address",
+        },
+        { status: 404 }
+      );
+    }
 
     const rawOrder = await request.json();
     const parsedOrder = orderSchema.safeParse(rawOrder);

@@ -1,10 +1,15 @@
 import { atom, selector } from "recoil";
 import { restaurantOptionType } from "validation";
-import { CartDataType, UserRestaurantBodyType } from "../../types";
+import { CartDataType, UserRestaurantBodyType } from "../../types/src";
 
 export const cityState = atom<string>({
   key: "cityState",
   default: "",
+});
+
+export const allCitiesState = atom<string[]>({
+  key: "allCitiesState",
+  default: [],
 });
 
 export const searchState = atom<string>({

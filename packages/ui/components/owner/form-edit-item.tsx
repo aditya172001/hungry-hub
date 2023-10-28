@@ -84,12 +84,11 @@ export function FormEditItem({
       });
       toast.success(`${response.data.message}`, {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
+        autoClose: 1500,
       });
       setTimeout(() => {
-        router.back();
-        router.refresh();
-      }, 3000);
+        router.push(`/restaurants/${restaurantID}`);
+      }, 1800);
     } catch (error: any) {
       console.error(error);
       if (error?.response?.data !== undefined) {

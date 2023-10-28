@@ -1,12 +1,16 @@
-// "use client";
+"use client";
 import { useState, type ReactElement } from "react";
 import {
   ChevronDownIcon,
   ClipboardDocumentListIcon,
 } from "@heroicons/react/20/solid";
-import { OrderType } from "types";
+import { ReviewType } from "types";
 
-export function IndividualOrder({ order }: { order: OrderType }): ReactElement {
+export function IndividualReview({
+  review,
+}: {
+  review: ReviewType;
+}): ReactElement {
   const [isopen, setIsOpen] = useState(false);
   return (
     <div
@@ -18,17 +22,17 @@ export function IndividualOrder({ order }: { order: OrderType }): ReactElement {
           <div
             className="bg-cover bg-center h-10 w-10 rounded-md"
             style={{
-              backgroundImage: `url(${order.restaurantProfilePicture})`,
+              backgroundImage: `url(${review.restaurantProfilePicture})`,
             }}
           />
           <div>
             <div>
               <span className="font-light">Restaurant : </span>
-              <span className="font-semibold">{order.restaurantName}</span>
+              <span className="font-semibold">{review.restaurantName}</span>
             </div>
             <div>
               <span className="font-light">Items : </span>{" "}
-              <span className="font-semibold">{order.items.length}</span>
+              <span className="font-semibold">{review.items.length}</span>
             </div>
           </div>
         </div>
@@ -40,28 +44,30 @@ export function IndividualOrder({ order }: { order: OrderType }): ReactElement {
       </div>
       <div
         className={`${
-          isopen ? "h-36" : "h-0"
+          isopen ? "h-32" : "h-0"
         } overflow-hidden duration-300 ease-in-out`}
       >
         <div className="pl-14">
           <div>
-            <span className="font-light">OrderStatus : </span>
-            <span className="font-semibold">{order.orderStatus}</span>
+            <span className="font-light">Rating : </span>
+            <span className="font-semibold">{review.rating}</span>
           </div>
           <div>
-            <span className="font-light">PaymentStatus : </span>
-            <span className="font-semibold">{order.paymentStatus}</span>
+            <span className="font-light">Review Text : </span>
+            <span className="font-semibold">
+              {review.reviewText ? review.reviewText : "NA"}
+            </span>
           </div>
           <div>
             <span className="font-light">Delivery Address : </span>
-            <span className="font-semibold">{`${order.deliveryAddress.street}, ${order.deliveryAddress.city}`}</span>
+            <span className="font-semibold">{`${review.deliveryAddress.street}, ${review.deliveryAddress.city}`}</span>
           </div>
           <div className="flex items-center space-x-2">
             <ClipboardDocumentListIcon className="h-4" />
             <div className="font-semibold">Items :-</div>
           </div>
           <div className="flex space-x-5">
-            {order.items.map((item, index) => (
+            {review.items.map((item, index) => (
               <div key={index} className=" text-sm font-light text-violet-600">
                 {item.itemName}
               </div>

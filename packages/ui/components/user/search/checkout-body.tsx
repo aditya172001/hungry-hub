@@ -11,8 +11,6 @@ export function CheckoutBody() {
   const cartPrice = useRecoilValue(cartPriceState);
   const { items } = cart;
 
-  async function handleCheckout() {}
-
   return (
     <div>
       <div className="flex items-center justify-between pt-3 pb- text-xl text-gray-700 font-semibold">

@@ -16,6 +16,7 @@ export function FormSingup({
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
   const router = useRouter();
+
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,7 +77,7 @@ export function FormSingup({
         <input
           required
           value={email}
-          type="text"
+          type="email"
           onChange={(e) => {
             setMyerror("");
             setEmail(e.target.value);

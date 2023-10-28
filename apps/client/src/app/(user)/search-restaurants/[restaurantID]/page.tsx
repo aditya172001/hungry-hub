@@ -4,7 +4,7 @@ import {
   ClipboardDocumentListIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/20/solid";
-import { UserRestaurantMenuItem } from "ui";
+import { UserRestaurantMenuItem, CartButton } from "ui";
 import Link from "next/link";
 
 export default async function SingleRestaurantinfo({
@@ -63,9 +63,7 @@ export default async function SingleRestaurantinfo({
           <ClipboardDocumentListIcon className="w-7" />
           <div>Menu</div>
         </div>
-        <Link href={"/checkout"}>
-          <ShoppingCartIcon className="w-7 hover:cursor-pointer text-gray-700" />
-        </Link>
+        <CartButton />
       </div>
 
       {menu ? (

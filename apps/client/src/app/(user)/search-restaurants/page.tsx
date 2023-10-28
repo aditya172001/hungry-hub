@@ -30,7 +30,7 @@ export default function SearchRestaurants() {
         />
       </div>
       <hr />
-      <RestaurantSearchBody />
+      <RestaurantSearchBody spinner="/tail-spin.svg" />
     </div>
   );
 }

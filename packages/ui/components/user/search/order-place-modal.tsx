@@ -12,15 +12,23 @@ import axios from "axios";
 
 export function OrderPlaceModal() {
   const router = useRouter();
+
+  //get info of items in cart
   const [cart, setCart] = useRecoilState(cartDataState);
   const cartPrice = useRecoilValue(cartPriceState);
+
+  //initialize data order placing and giving review
   const [rating, setRating] = useState(4);
   const [reviewText, setReviewText] = useState("");
   const [orderID, setOrderID] = useState<string | undefined>(undefined);
   const { items: myitems, restaurantID } = cart;
   const items = myitems.map((item) => item.itemID);
+
   const [isOrderPlaceOpen, setIsOrderPlaceOpen] = useState(false);
   const [isGiveReviewOpen, setIsGiveReviewOpen] = useState(false);
+  const [isCheckoutButtonDisabled, setIsCheckoutButtonDisabled] =
+    useState(false);
+
   function openOrderPlaceModal() {
     setIsOrderPlaceOpen(true);
   }
@@ -65,6 +73,7 @@ export function OrderPlaceModal() {
   }
 
   async function handleCheckout() {
+    setIsCheckoutButtonDisabled(true);
     closeOrderPlaceModal();
     try {
       const response = await axios.post("/api/user/order", {
@@ -80,6 +89,7 @@ export function OrderPlaceModal() {
 
       openGiveReviewModal();
     } catch (error: any) {
+      setIsCheckoutButtonDisabled(false);
       if (error.response.data.message) {
         toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
@@ -95,13 +105,16 @@ export function OrderPlaceModal() {
   return (
     <>
       <ToastContainer />
-      <div
-        className="flex items-center space-x-1 hover:cursor-pointer border border-transparent p-1 rounded-md hover:bg-violet-200 hover:shadow hover:text-black"
+      <button
+        className={`flex items-center space-x-1 hover:cursor-pointer border border-transparent p-1 rounded-md bg-violet-200 hover:shadow hover:text-black ${
+          isCheckoutButtonDisabled ? "disabled:shadow disabled:text-black" : ""
+        }`}
+        disabled={isCheckoutButtonDisabled}
         onClick={openOrderPlaceModal}
       >
         <div>Checkout</div>
         <ShoppingBagIcon className="w-6 text-violet-700" />
-      </div>
+      </button>
       {/* this is place order modal  */}
       <Transition appear show={isOrderPlaceOpen} as={Fragment}>
         <Dialog

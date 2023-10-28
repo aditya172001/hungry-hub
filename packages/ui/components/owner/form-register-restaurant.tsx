@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
@@ -29,10 +29,13 @@ export function FormRegisterRestaurant({
   const [nightlife, setNightlife] = useState(false);
 
   const [myerror, setMyerror] = useState("");
+  const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
+    useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
+      setIsRegisterButtonDisabled(true);
       const response = await axios.post("/api/owner/restaurants", {
         restaurantName,
         description,
@@ -44,13 +47,13 @@ export function FormRegisterRestaurant({
       });
       toast.success(`${response.data.message}`, {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
+        autoClose: 1500,
       });
       setTimeout(() => {
         router.push("/restaurants");
-        router.refresh();
-      }, 3000);
+      }, 1800);
     } catch (error: any) {
+      setIsRegisterButtonDisabled(false);
       console.error(error);
       if (error?.response?.data !== undefined) {
         setMyerror(error.response.data.message);
@@ -244,12 +247,14 @@ export function FormRegisterRestaurant({
           type="button"
           onClick={handleCancel}
           className="border w-full rounded-md h-11 border-violet-500 bg-white text-violet-500 my-5 mr-1"
+          disabled={isRegisterButtonDisabled}
         >
           Cancel
         </button>
         <button
           type="submit"
           className="border w-full rounded-md h-11 bg-violet-500 text-white my-5 ml-1"
+          disabled={isRegisterButtonDisabled}
         >
           Register
         </button>

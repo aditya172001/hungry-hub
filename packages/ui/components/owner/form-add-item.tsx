@@ -29,6 +29,7 @@ export function FormAddItem({
   const [veg, setVeg] = useState(true);
 
   const [myerror, setMyerror] = useState("");
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
   const cuisineOptions = [
     "Indian",
@@ -45,6 +46,7 @@ export function FormAddItem({
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsSubmitDisabled(true);
     try {
       const response = await axios.post(`/api/owner/restaurants/menu`, {
         restaurant: restaurantID,
@@ -58,14 +60,14 @@ export function FormAddItem({
       });
       toast.success(`${response.data.message}`, {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
+        autoClose: 1500,
       });
       setTimeout(() => {
-        router.back();
-        router.refresh();
-      }, 3000);
+        router.push(`/restaurants/${restaurantID}`);
+      }, 1800);
     } catch (error: any) {
       console.error(error);
+      setIsSubmitDisabled(false);
       if (error?.response?.data !== undefined) {
         setMyerror(error.response.data.message);
       } else if (error.message == "Network Error") {
@@ -184,12 +186,14 @@ export function FormAddItem({
           type="button"
           onClick={handleCancel}
           className="border w-full rounded-md h-11 border-violet-500 bg-white text-violet-500 my-5 mr-1"
+          disabled={isSubmitDisabled}
         >
           Cancel
         </button>
         <button
           type="submit"
           className="border w-full rounded-md h-11 bg-violet-500 text-white my-5 ml-1"
+          disabled={isSubmitDisabled}
         >
           Add item
         </button>

@@ -5,6 +5,8 @@ import { Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { profileDropdownState } from "store";
 
 export function Dropdown({
   userProfileImage,
@@ -13,7 +15,7 @@ export function Dropdown({
   userProfileImage: string;
   userProfileName: string;
 }): ReactElement {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useRecoilState(profileDropdownState);
   const router = useRouter();
   let userName = userProfileName;
   userName = userName.split("@")[0];
@@ -28,7 +30,7 @@ export function Dropdown({
         onClick={() => setIsOpen((isOpen) => !isOpen)}
       >
         <img
-          className="h-10 rounded-full"
+          className="h-10 w-10 rounded-full object-cover"
           src={userProfileImage}
           alt="userprofile image"
         />

@@ -6,14 +6,16 @@ import { itemPostType, restauantType } from "validation";
 export async function ExploreOptions(): Promise<ReactElement> {
   await ensureDbConnection();
 
-  //get all the restaurant names
+  //get all the restaurant data
   const rawRestaurants: restauantType[] =
     await Restaurant.find().populate("address");
+
+  //get all the restaurant names
   const restaurnts = rawRestaurants
     .map((restaurant) => restaurant.restaurantName)
     .slice(0, 6);
 
-  //get all the cities we are available in
+  //get all the cities we are available in and display only 6
   const rawCities: string[] = rawRestaurants.map(
     (restaurant) => restaurant.address.city
   );

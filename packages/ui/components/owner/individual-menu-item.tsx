@@ -3,7 +3,7 @@ import { useState, type ReactElement, useCallback } from "react";
 import { ChevronDownIcon, PencilIcon } from "@heroicons/react/20/solid";
 import { itemPostType } from "validation";
 import { useRouter, useSearchParams } from "next/navigation";
-import { EditModal } from "./edit-modal";
+import { DeleteItemFromMenuModal } from "./modal-delete-item-from-menu";
 
 interface ItemType extends itemPostType {
   _id: string;
@@ -61,7 +61,7 @@ export function IndividualMenuItem({
           </div>
           <div
             className={`${
-              isopen ? " max-h-fit  mt-2" : "max-h-0"
+              isopen ? " h-20 mt-2" : "h-0"
             } overflow-hidden duration-300 ease-in-out`}
           >
             <div>
@@ -103,7 +103,10 @@ export function IndividualMenuItem({
             )
           }
         />
-        <EditModal itemID={myItem._id} restaurantID={restaurantID} />
+        <DeleteItemFromMenuModal
+          itemID={myItem._id}
+          restaurantID={restaurantID}
+        />
       </div>
     </div>
   );

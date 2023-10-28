@@ -67,7 +67,7 @@ export function FormSignin({
         <input
           required
           value={email}
-          type="text"
+          type="email"
           onChange={(e) => {
             setMyerror("");
             setEmail(e.target.value);

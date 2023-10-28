@@ -9,7 +9,7 @@ enum Options {
   reviews = "Reviews",
   order_history = "Order History",
 }
-export function ProfileBody(): ReactElement {
+export function ProfileBody({ spinner }: { spinner: string }): ReactElement {
   const [currentOption, setCurrentOption] = useState(Options.address);
 
   return (
@@ -51,9 +51,15 @@ export function ProfileBody(): ReactElement {
       </div>
       <div className="col-span-2">
         <div className="text-xl font-semibold">{currentOption}</div>
-        {currentOption === Options.address ? <UserAddress /> : null}
-        {currentOption === Options.order_history ? <UserOrders /> : null}
-        {currentOption === Options.reviews ? <UserReviews /> : null}
+        {currentOption === Options.address ? (
+          <UserAddress spinner={spinner} />
+        ) : null}
+        {currentOption === Options.order_history ? (
+          <UserOrders spinner={spinner} />
+        ) : null}
+        {currentOption === Options.reviews ? (
+          <UserReviews spinner={spinner} />
+        ) : null}
       </div>
     </div>
   );
