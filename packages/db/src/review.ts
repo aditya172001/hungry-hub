@@ -34,22 +34,5 @@ const reviewSchema = new mongoose.Schema({
   },
 });
 
-//all pre middlware here are wrong fix them
-
-reviewSchema.pre("deleteOne", async function () {
-  const review = this as any;
-  const orderId = review.order;
-  await Order.deleteOne({ _id: orderId });
-});
-
-reviewSchema.pre("deleteMany", async function () {
-  const query = this.getQuery();
-  const reviewsToDelete = await this.model.find(query);
-
-  const orderIds = reviewsToDelete.map((review) => review.order);
-
-  await Order.deleteMany({ _id: { $in: orderIds } });
-});
-
 export const Review =
   mongoose.models.Review || mongoose.model("Review", reviewSchema);

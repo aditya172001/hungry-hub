@@ -44,7 +44,7 @@ export function UserReviews({ spinner }: { spinner: string }): ReactElement {
         </div>
       ) : (
         <div className="flex h-96 items-center justify-center">
-          No order history available, Order some food.
+          No review history available, Order some food and give review.
         </div>
       )}
     </div>
