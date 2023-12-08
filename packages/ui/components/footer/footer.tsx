@@ -8,30 +8,22 @@ export function Footer(): ReactElement {
       <div className="text-3xl font-bold font-serif">hungryHub</div>
       <div className="flex justify-between text-sm">
         <div className="pt-3 text-sm text-gray-700">
-          <p>
-            HungryHub, developed by{" "}
-            <span className="text-gray-800">
-              <em>Aditya Kumar</em>
-            </span>
-            , is a web application that demonstrates a deep understanding of web
-            development, user experience design, and innovation.
-          </p>
+          <p>© 2023 Aditya Kumar</p>
           <p className="py-2">
-            As a full-stack developer, I've created this project to showcase my
-            skills in creating engaging and interactive web solutions.
-          </p>
-          <p>
-            For potential recruiters and collaboration opportunities, please
-            don't hesitate to contact me at{" "}
+            Disclaimer: This website is a demonstration and mock-up, created for
+            portfolio and educational purposes only. The content, services, and
+            features presented here are simulated and do not represent
+            real-world functionality. Any resemblance to actual products,
+            services, or entities is purely coincidental. This website does not
+            offer genuine services, and no transactions or interactions on this
+            site have real-world consequences. For inquiries, please contact{" "}
             <a
               href="mailto:adityakumar172001@gmail.com"
               className="text-black font-semibold"
             >
               adityakumar172001@gmail.com
             </a>
-            . I'm excited to discuss how my expertise can benefit your
-            organization and to explore exciting opportunities in the field of
-            web development.
+            .
           </p>
         </div>
         <div className="flex flex-col items-start  py-1 min-w-fit pl-10">
