@@ -117,7 +117,7 @@ export function FormEditItem({
           setMyerror("");
           setItemName(e.target.value);
         }}
-        className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+        className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
       />
       <label className="text-sm py-1">Description</label>
       <input
@@ -127,7 +127,7 @@ export function FormEditItem({
           setMyerror("");
           setDescription(e.target.value);
         }}
-        className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+        className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
       />
       <label className="text-sm py-1">Image URL</label>
       <input
@@ -137,7 +137,7 @@ export function FormEditItem({
           setMyerror("");
           setImageURL(e.target.value);
         }}
-        className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+        className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
       />
       <label className="text-sm py-1">Price</label>
       <input
@@ -147,7 +147,7 @@ export function FormEditItem({
           setMyerror("");
           setPrice(e.target.value);
         }}
-        className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+        className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
       />
       <div className="flex">
         <div>
@@ -180,7 +180,7 @@ export function FormEditItem({
         </div>
       </div>
       <div className="flex">
-        <div className="flex items-center pt-1">
+        <div className="flex items-center pt-2">
           <label className="text-sm py-1 pr-2">Veg</label>
           <Switch
             checked={veg}
@@ -211,13 +211,13 @@ export function FormEditItem({
         <button
           type="button"
           onClick={handleCancel}
-          className="border w-full rounded-md h-11 border-violet-500 bg-white text-violet-500 my-5 mr-1"
+          className="border w-full rounded-md h-8 sm:h-11 border-violet-500 bg-white text-violet-500 my-3 sm:my-5 mr-1"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="border w-full rounded-md h-11 bg-violet-500 text-white my-5 ml-1"
+          className="border w-full rounded-md h-8 sm:h-11 bg-violet-500 text-white my-3 sm:my-5 ml-1"
         >
           Update
         </button>

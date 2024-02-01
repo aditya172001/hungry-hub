@@ -4,6 +4,10 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "2xl": "1400px",
+      },
+    },
   },
 };

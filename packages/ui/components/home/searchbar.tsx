@@ -61,11 +61,11 @@ export function SearchBar(): ReactElement {
   }
 
   return (
-    <div className="flex relative">
-      <div className="absolute bg-white z-0 w-full rounded-lg h-12" />
+    <div className="flex relative mx-4">
+      <div className="absolute bg-white z-0 w-full rounded-lg h-8 sm:h-12" />
       <div className="z-10">
         <div
-          className="flex items-center text-black rounded-lg py-1 pl-5  bg-white"
+          className="flex items-center text-black rounded-lg py-1 pl-2 sm:pl-5  bg-white"
           onClick={() => {
             //to make sure is doesnt get disabled by layout disable drodown
             setTimeout(() => {
@@ -74,14 +74,14 @@ export function SearchBar(): ReactElement {
           }}
         >
           <MapPinIcon
-            className="w-5 text-gray-500"
+            className="hidden sm:block w-5 text-gray-500"
             stroke="currentColor"
             strokeWidth={1.5}
             fill="none"
           />
           <input
             value={city}
-            className="p-2 h-10 w-36 focus:outline-none"
+            className="p-1 sm:p-2 h-6 sm:h-10 w-24 sm:w-36 focus:outline-none"
             placeholder="city"
             onChange={(e) => setCity(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -96,13 +96,13 @@ export function SearchBar(): ReactElement {
           }`}
         >
           {isCityLoading && (
-            <div className="px-4 py-1 w-44 rounded-md text-black h-fit">
+            <div className="px-4 py-1 w-28 sm:w-44 rounded-md text-black h-fit">
               Loading...
             </div>
           )}
 
           {!isCityLoading && allCities.length === 0 && (
-            <div className="px-4 py-1 w-44 rounded-md text-black h-fit">
+            <div className="px-4 py-1 w-28 sm:w-44 rounded-md text-black h-fit">
               Not available
             </div>
           )}
@@ -134,11 +134,11 @@ export function SearchBar(): ReactElement {
           )}
         </div>
       </div>
-      <div className="z-10 flex text-black rounded-lg py-1 px-5 bg-white">
-        <MagnifyingGlassIcon className="w-5 bg-white text-gray-500" />
+      <div className="z-10 flex text-black rounded-lg py-1 px-2 sm:px-5 bg-white">
+        <MagnifyingGlassIcon className="hidden sm:block w-5 bg-white" />
         <input
           value={search}
-          className="p-2 h-10 w-96 rounded-r-md focus:outline-none"
+          className="p-1 sm:p-2 h-6 sm:h-10 w-60 sm:w-96 rounded-r-md focus:outline-none"
           placeholder="Search for a restaurant, cuisine or dish"
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleKeyDown}

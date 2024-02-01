@@ -88,7 +88,7 @@ export function FormUpdateUser({
           setMyerror("");
           setUserName(e.target.value);
         }}
-        className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+        className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
       />
       <label className="text-sm py-1">Profile Picture URL</label>
       <input
@@ -98,11 +98,11 @@ export function FormUpdateUser({
           setMyerror("");
           setProfilePicture(e.target.value);
         }}
-        className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+        className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
       />
       <div className="text-sm py-1">Address</div>
-      <div className="flex">
-        <div>
+      <div className="grid grid-cols-2">
+        <div className=" col-span-1">
           <label className="text-sm py-1 font-light">Country</label>
           <input
             value={country}
@@ -111,11 +111,11 @@ export function FormUpdateUser({
               setMyerror("");
               setCountry(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 mr-1 pl-3 outline-violet-400"
+            className="border w-11/12 rounded-md h-7 sm:h-9 mb-1 mr-1 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
-        <div>
-          <label className="text-sm py-1 font-light">State</label>
+        <div className=" col-span-1">
+          <label className="ml-2 text-sm py-1 font-light">State</label>
           <input
             value={state}
             type="text"
@@ -123,13 +123,13 @@ export function FormUpdateUser({
               setMyerror("");
               setState(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 ml-1 pl-3 outline-violet-400"
+            className=" border w-11/12 rounded-md h-7 sm:h-9 mb-1 ml-2 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
       </div>
-      <div className="flex">
-        <div>
-          <label className="text-sm py-1 font-light">City</label>
+      <div className="grid grid-cols-2">
+        <div className=" col-span-1">
+          <label className="text-sm py-1 font-light mr-4">City</label>
           <input
             value={city}
             type="text"
@@ -137,11 +137,11 @@ export function FormUpdateUser({
               setMyerror("");
               setCity(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 mr-1 pl-3 outline-violet-400"
+            className="border w-11/12 rounded-md h-7 sm:h-9 mb-1 mr-1 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
-        <div>
-          <label className="text-sm py-1 font-light">Street</label>
+        <div className=" col-span-1">
+          <label className="ml-2 text-sm py-1 font-light">Street</label>
           <input
             value={street}
             type="text"
@@ -149,13 +149,13 @@ export function FormUpdateUser({
               setMyerror("");
               setStreet(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 ml-1 pl-3 outline-violet-400"
+            className="border w-11/12 rounded-md h-7 sm:h-9 mb-1 ml-2 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
       </div>
-      <div className="w-full flex justify-center">
-        <div className="flex flex-col">
-          <label className="text-sm py-1 font-light align w-half">
+      <div className="flex justify-center w-60 sm:w-96">
+        <div className="pl-8">
+          <label className="text-sm py-1 font-light align w-1/2">
             Postal Code
           </label>
           <input
@@ -165,7 +165,7 @@ export function FormUpdateUser({
               setMyerror("");
               setPostalCode(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 pl-3 outline-violet-400"
+            className="border w-10/12 rounded-md h-7 sm:h-9 mb-1 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
       </div>
@@ -183,13 +183,13 @@ export function FormUpdateUser({
         <button
           type="button"
           onClick={handleCancel}
-          className="border w-full rounded-md h-11 border-violet-500 bg-white text-violet-500 my-5 mr-1"
+          className="border w-full rounded-md h-8 sm:h-11 border-violet-500 bg-white text-violet-500 my-3 sm:my-5 mr-1"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="border w-full rounded-md h-11 bg-violet-500 text-white my-5 ml-1"
+          className="border w-full rounded-md h-8 sm:h-11 bg-violet-500 text-white my-3 sm:my-5 ml-1"
         >
           Update
         </button>

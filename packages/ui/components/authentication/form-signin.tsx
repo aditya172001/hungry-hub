@@ -72,7 +72,7 @@ export function FormSignin({
             setMyerror("");
             setEmail(e.target.value);
           }}
-          className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+          className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 pl-3 outline-violet-400"
         />
         <label className="text-sm py-1">Password</label>
         <input
@@ -83,7 +83,7 @@ export function FormSignin({
             setMyerror("");
             setPassword(e.target.value);
           }}
-          className="border w-full rounded-md h-9 mb-1 pl-3 outline-violet-400"
+          className="border w-full rounded-md h-7 sm:h-9 sm:mb-1 pl-3 outline-violet-400"
         />
         {myerror ? (
           <div className="flex items-center">
@@ -95,24 +95,24 @@ export function FormSignin({
         )}
         <button
           type="submit"
-          className="border w-full rounded-md h-11 bg-violet-500 text-white my-5"
+          className="border w-full rounded-md h-8 sm:h-11 bg-violet-500 text-sm sm:text-base text-white my-2 sm:my-5"
         >
           Signin
         </button>
       </form>
-      <div className="flex items-center pb-5">
+      <div className="flex items-center">
         <div className="flex-grow border-t border-gray-300"></div>
         <div className="mx-4 text-gray-500">or</div>
         <div className="flex-grow border-t border-gray-300"></div>
       </div>
       <button
-        className="border w-full rounded-md h-11 bg-white mb-5 flex items-center justify-center"
+        className="border w-full rounded-md h-8 sm:h-11 bg-white my-2 sm:my-5 flex items-center justify-center text-sm sm:text-base"
         onClick={handleSignin}
       >
         <Image src={googleicon} width={20} height={20} alt="goole-icon" />
         <div className="pl-2">Sign in with google</div>
       </button>
-      <div className="flex justify-center text-sm">
+      <div className="flex justify-center text-xs sm:text-sm">
         Don't have an account?{" "}
         <a
           className="text-violet-500 ml-1 hover:cursor-pointer"

@@ -114,7 +114,7 @@ export function FormUpdateRestaurant({
           setMyerror("");
           setRestaurantName(e.target.value);
         }}
-        className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+        className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
       />
       <label className="text-sm py-1">Description</label>
       <input
@@ -124,7 +124,7 @@ export function FormUpdateRestaurant({
           setMyerror("");
           setDescription(e.target.value);
         }}
-        className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+        className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
       />
       <label className="text-sm py-1">Profile Picture URL</label>
       <input
@@ -134,11 +134,11 @@ export function FormUpdateRestaurant({
           setMyerror("");
           setProfilePicture(e.target.value);
         }}
-        className="border w-full rounded-md h-9 mb-5 pl-3 outline-violet-400"
+        className="border w-full rounded-md h-7 sm:h-9 mb-2 sm:mb-5 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
       />
       <div className="text-sm py-1">Address</div>
-      <div className="flex">
-        <div>
+      <div className="grid grid-cols-2">
+        <div className=" col-span-1">
           <label className="text-sm py-1 font-light">Country</label>
           <input
             value={country}
@@ -147,10 +147,10 @@ export function FormUpdateRestaurant({
               setMyerror("");
               setCountry(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 mr-1 pl-3 outline-violet-400"
+            className="border w-11/12 rounded-md h-7 sm:h-9 mb-1 mr-1 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
-        <div>
+        <div className=" col-span-1">
           <label className="text-sm py-1 font-light">State</label>
           <input
             value={state}
@@ -159,13 +159,13 @@ export function FormUpdateRestaurant({
               setMyerror("");
               setState(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 ml-1 pl-3 outline-violet-400"
+            className="border w-11/12 rounded-md h-7 sm:h-9 mb-1 ml-2 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
       </div>
-      <div className="flex">
-        <div>
-          <label className="text-sm py-1 font-light">City</label>
+      <div className="grid grid-cols-2">
+        <div className=" col-span-1">
+          <label className="text-sm py-1 font-light mr-4">City</label>
           <input
             value={city}
             type="text"
@@ -173,11 +173,11 @@ export function FormUpdateRestaurant({
               setMyerror("");
               setCity(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 mr-1 pl-3 outline-violet-400"
+            className="border w-11/12 rounded-md h-7 sm:h-9 mb-1 mr-1 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
         <div>
-          <label className="text-sm py-1 font-light">Street</label>
+          <label className="ml-2 text-sm py-1 font-light">Street</label>
           <input
             value={street}
             type="text"
@@ -185,12 +185,12 @@ export function FormUpdateRestaurant({
               setMyerror("");
               setStreet(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 ml-1 pl-3 outline-violet-400"
+            className="border w-11/12 rounded-md h-7 sm:h-9 mb-1 ml-2 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
       </div>
-      <div className="w-full flex justify-center">
-        <div className="flex flex-col">
+      <div className="flex justify-center w-60 sm:w-96">
+        <div className="pl-8">
           <label className="text-sm py-1 font-light align w-half">
             Postal Code
           </label>
@@ -201,13 +201,13 @@ export function FormUpdateRestaurant({
               setMyerror("");
               setPostalCode(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 pl-3 outline-violet-400"
+            className="border w-10/12 rounded-md h-7 sm:h-9 mb-1 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
       </div>
       <div className="text-sm py-1">Timing</div>
-      <div className="flex">
-        <div>
+      <div className="grid grid-cols-2">
+        <div className=" col-span-1">
           <label className="text-sm py-1 font-light">Opening Time</label>
           <input
             value={openingTime}
@@ -216,11 +216,11 @@ export function FormUpdateRestaurant({
               setMyerror("");
               setOpeningTime(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 mr-1 pl-3 outline-violet-400"
+            className="border w-11/12 rounded-md h-7 sm:h-9 mb-1 mr-1 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
-        <div>
-          <label className="text-sm py-1 font-light">Closing Time</label>
+        <div className=" col-span-1">
+          <label className="ml-2 text-sm py-1 font-light">Closing Time</label>
           <input
             value={closingTime}
             type="text"
@@ -228,40 +228,40 @@ export function FormUpdateRestaurant({
               setMyerror("");
               setClosingTime(e.target.value);
             }}
-            className="border w-half rounded-md h-9 mb-1 ml-1 pl-3 outline-violet-400"
+            className="border w-11/12 rounded-md h-7 sm:h-9 mb-1 ml-2 px-2 sm:px-3 outline-violet-400 text-sm sm:text-base"
           />
         </div>
       </div>
-      <div className="flex">
-        <div className="flex items-center pt-1">
+      <div className="grid grid-cols-2 w-full mt-1">
+        <div className="flex col-span-1 items-center">
           <label className="text-sm py-1 pr-2">Dining</label>
           <Switch
             checked={dining}
             onChange={setDining}
             className={`${dining ? "bg-violet-500" : "bg-violet-500"}
-          relative inline-flex h-[24px] w-[48px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 mr-24`}
+            relative inline-flex h-5 sm:h-6 w-10 sm:w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
           >
             <span className="sr-only">Use setting</span>
             <span
               aria-hidden="true"
               className={`${dining ? "translate-x-6" : "translate-x-0"}
-            pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+              pointer-events-none inline-block h-4 sm:h-5 w-4 sm:w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
             />
           </Switch>
         </div>
-        <div className="flex items-center">
+        <div className="flex col-span-1 items-center">
           <label className="text-sm py-1 px-2">Night Life</label>
           <Switch
             checked={nightlife}
             onChange={setNightlife}
             className={`${nightlife ? "bg-violet-500" : "bg-violet-500"}
-          relative inline-flex h-[24px] w-[48px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+            relative inline-flex h-5 sm:h-6 w-10 sm:w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
           >
             <span className="sr-only">Use setting</span>
             <span
               aria-hidden="true"
               className={`${nightlife ? "translate-x-6" : "translate-x-0"}
-            pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+              pointer-events-none inline-block h-4 sm:h-5 w-4 sm:w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
             />
           </Switch>
         </div>
@@ -280,13 +280,13 @@ export function FormUpdateRestaurant({
         <button
           type="button"
           onClick={handleCancel}
-          className="border w-full rounded-md h-11 border-violet-500 bg-white text-violet-500 my-5 mr-1"
+          className="border w-full rounded-md h-8 sm:h-11 border-violet-500 bg-white text-violet-500 my-3 sm:my-5 mr-1"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="border w-full rounded-md h-11 bg-violet-500 text-white my-5 ml-1"
+          className="border w-full rounded-md h-8 sm:h-11 bg-violet-500 text-white my-3 sm:my-5 ml-1"
         >
           Update
         </button>

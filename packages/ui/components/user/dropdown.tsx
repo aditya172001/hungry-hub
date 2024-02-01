@@ -24,13 +24,13 @@ export function Dropdown({
   userName = userName.substring(0, 10);
 
   return (
-    <div className=" min-w-20">
+    <div className="w-full">
       <div
         className="flex items-center hover:cursor-pointer space-x-1"
         onClick={() => setIsOpen((isOpen) => !isOpen)}
       >
         <img
-          className="h-10 w-10 rounded-full object-cover"
+          className=" h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover"
           src={userProfileImage}
           alt="userprofile image"
         />
@@ -49,7 +49,7 @@ export function Dropdown({
         leave="transition ease-in duration-75"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
-        className="absolute right-48 mt-2 w-32 bg-white border border-violet-200 rounded-md shadow-lg hover:cursor-pointer"
+        className="absolute right-4 sm:right-12 lg:right-48 mt-2 w-32 bg-white border border-violet-200 rounded-md shadow-lg hover:cursor-pointer z-10"
       >
         <div
           className="text-black flex justify-center p-1 hover:bg-violet-200"

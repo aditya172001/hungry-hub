@@ -1,11 +1,7 @@
 import { getSingleRestaurantData } from "./get-single-restaurant-data";
-import {
-  StarIcon,
-  ClipboardDocumentListIcon,
-  ShoppingCartIcon,
-} from "@heroicons/react/20/solid";
+import { StarIcon, ClipboardDocumentListIcon } from "@heroicons/react/20/solid";
 import { UserRestaurantMenuItem, CartButton } from "ui";
-import Link from "next/link";
+import Image from "next/image";
 
 export default async function SingleRestaurantinfo({
   params,
@@ -28,9 +24,11 @@ export default async function SingleRestaurantinfo({
 
   return (
     <div className="py-4">
-      <img
+      <Image
         src={profilePicture}
         alt="restaurant profile img"
+        width={500}
+        height={500}
         className="w-full h-80 object-cover"
       />
       <div className="flex items-center justify-between py-2">
@@ -40,10 +38,10 @@ export default async function SingleRestaurantinfo({
             rating >= 3.5
               ? "bg-green-600"
               : rating >= 2
-              ? "bg-yellow-500"
-              : rating === 0
-              ? "bg-gray-400"
-              : "bg-red-600"
+                ? "bg-yellow-500"
+                : rating === 0
+                  ? "bg-gray-400"
+                  : "bg-red-600"
           }`}
         >
           <div>{rating}</div>

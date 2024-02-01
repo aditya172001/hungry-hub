@@ -32,7 +32,7 @@ export async function ProfileDropdown({
   }
 
   return (
-    <div>
+    <div className="z-10">
       {session ? (
         <Dropdown
           userProfileImage={userProfileImage}
