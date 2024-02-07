@@ -32,36 +32,36 @@ export function RestaurantOption({
       }}
     >
       {restaurantOption === currentRestaurantOption ? (
-        <div className="flex items-center space-x-2 p-4 pt-6 text-lg font-semibold text-violet-500 border-b-2 border-violet-500 transition-all duration-200">
+        <div className="flex items-center space-x-2 p-4 pt-8 xl:pt-6 text-lg font-semibold text-violet-500 border-b-2 border-violet-500 transition-all duration-200">
           <div
-            className={` flex items-center justify-center rounded-full h-16 w-16 ${bgActiveColor}`}
+            className={` flex items-center justify-center rounded-full h-12 sm:h-16 w-12 sm:w-16 ${bgActiveColor}`}
           >
             <Image
               src={activeIcon}
               height={100}
               width={100}
               alt="restaurant option icon"
-              className=" h-8 w-8"
+              className="h-6 sm:h-8 w-6 sm:w-8"
             />
           </div>
 
-          <div>{text}</div>
+          <div className="text-base sm:text-lg">{text}</div>
         </div>
       ) : (
-        <div className="flex items-center space-x-2 p-4 pt-6 text-lg font-semibold text-gray-700 transition-all duration-200">
+        <div className="flex items-center space-x-2 p-4 pt-8 xl:pt-6 text-lg font-semibold text-gray-700 transition-all duration-200">
           <div
-            className={` flex items-center justify-center rounded-full h-16 w-16 ${bgInactiveColor}`}
+            className={` flex items-center justify-center rounded-full h-12 sm:h-16 w-12 sm:w-16 ${bgInactiveColor}`}
           >
             <Image
               src={inactiveIcon}
               height={100}
               width={100}
               alt="restaurant option icon"
-              className=" h-8 w-8"
+              className="h-6 sm:h-8 w-6 sm:w-8"
             />
           </div>
 
-          <div>{text}</div>
+          <div className="hidden sm:block text-lg">{text}</div>
         </div>
       )}
     </div>

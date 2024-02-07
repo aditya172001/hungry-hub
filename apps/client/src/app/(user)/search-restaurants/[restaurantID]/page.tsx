@@ -23,18 +23,20 @@ export default async function SingleRestaurantinfo({
   } = restaurant;
 
   return (
-    <div className="py-4">
+    <div className="py-8 xl:py-4">
       <Image
         src={profilePicture}
         alt="restaurant profile img"
         width={500}
         height={500}
-        className="w-full h-80 object-cover"
+        className="w-full h-40 sm:h-80 object-cover"
       />
       <div className="flex items-center justify-between py-2">
-        <div className="text-4xl font-semibold">{restaurantName}</div>
+        <div className="text-2xl sm:text-4xl font-semibold">
+          {restaurantName}
+        </div>
         <div
-          className={`flex items-center justify-center space-x-1 w-16 p-1 rounded-md text-white font-semibold ${
+          className={`flex items-center justify-center space-x-1 w-14 sm:w-16 p-1 rounded-md text-sm sm:text-base text-white font-semibold ${
             rating >= 3.5
               ? "bg-green-600"
               : rating >= 2
@@ -45,7 +47,7 @@ export default async function SingleRestaurantinfo({
           }`}
         >
           <div>{rating}</div>
-          <StarIcon className="w-4" />
+          <StarIcon className="w-3 sm:w-4" />
         </div>
       </div>
       <div className="text-gray-700">{description}</div>

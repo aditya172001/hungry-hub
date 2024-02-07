@@ -69,21 +69,29 @@ export function UserRestaurantMenuItem({
             />
           </div>
           <div>
-            <div className="py-1 text-lg font-semibold">{item.itemName}</div>
-            <div className="text-gray-700">{item.description}</div>
-            <div className="py-1">₹{item.price}</div>
+            <div className="py-1 text-base sm:text-lg font-semibold">
+              {item.itemName}
+            </div>
+            <div className="text-sm sm:text-base text-gray-700">
+              {item.description}
+            </div>
+            <div className="text-sm sm:text-base py-1">₹{item.price}</div>
           </div>
         </div>
         <div
-          className={`flex items-center justify-center min-w-fit px-2 hover:cursor-pointer transition-all ${
-            itemAdded ? "rotate-180" : "rotate-90"
-          } duration-300`}
+          className={`flex items-center justify-center px-2 hover:cursor-pointer `}
         >
-          {itemAdded ? (
-            <MinusIcon className="w-6" onClick={handleRemoveItemFromCart} />
-          ) : (
-            <PlusIcon className="w-6" onClick={handleAddItemToCart} />
-          )}
+          <div
+            className={`transition-all duration-300 ${
+              itemAdded ? "rotate-180" : "rotate-90"
+            }`}
+          >
+            {itemAdded ? (
+              <MinusIcon className="w-6" onClick={handleRemoveItemFromCart} />
+            ) : (
+              <PlusIcon className="w-6" onClick={handleAddItemToCart} />
+            )}
+          </div>
         </div>
       </div>
     </>

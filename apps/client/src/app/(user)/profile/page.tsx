@@ -1,6 +1,8 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { validateUserSession } from "@/app/api/validateUserSession";
 import { getServerSession } from "next-auth";
 import { ProfileBody, ProfileHeader } from "ui";
+import { userType } from "validation";
 
 export default async function Profile() {
   let userProfileImage = "/empty-profile-picture.png";
@@ -13,6 +15,11 @@ export default async function Profile() {
   }
   if (session?.user?.image) {
     userProfileImage = session.user.image;
+  } else {
+    const user: userType = await validateUserSession(session);
+    if (user.profilePicture) {
+      userProfileImage = user.profilePicture;
+    }
   }
 
   return (

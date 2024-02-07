@@ -14,7 +14,7 @@ export default function Home() {
         authOptions={authOptions}
         profileImage="/empty-profile-picture.png"
       />
-      <div className="flex justify-between space-x-10 px-48 py-10">
+      <div className="flex flex-wrap lg:flex-nowrap justify-around px-4 sm:px-12 2xl:px-48 py-10">
         <DiningOption
           image="/order-online.jpg"
           mode="Online Order"

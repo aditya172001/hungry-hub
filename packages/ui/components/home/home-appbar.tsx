@@ -17,7 +17,10 @@ export async function HomeAppbar({
   return (
     <div className="grid grid-cols-6 gap-2 py-5 items-center">
       <div className=" col-span-4"></div>
-      <Link href="/partner-with-us" className="py-2 pr-10 focus:outline-none">
+      <Link
+        href="/partner-with-us"
+        className="hidden sm:block py-2 pr-10 focus:outline-none"
+      >
         {myUser?.userType === "resOwner" ? "My Restaurants" : "Add Restaurant"}
       </Link>
       <div className="flex flex-row-reverse">

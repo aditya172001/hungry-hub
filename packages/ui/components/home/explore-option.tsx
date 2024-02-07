@@ -42,7 +42,7 @@ export async function ExploreOptions(): Promise<ReactElement> {
     .slice(0, 6);
 
   return (
-    <div className="px-48 py-10 space-y-4">
+    <div className="px-4 sm:px-12 2xl:px-48 py-10 space-y-4">
       <div className="text-2xl">Explore options</div>
       <MyAccordian title="Popular cuisines" contents={dishes} />
       <MyAccordian title="Popular restaurants" contents={restaurnts} />

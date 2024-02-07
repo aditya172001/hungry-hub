@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function Footer(): ReactElement {
   return (
-    <div className="bg-purple-200 px-48 py-8">
+    <div className="bg-purple-200 px-4 sm:px-12 2xl:px-48 py-8">
       <div className="text-3xl font-bold font-serif">hungryHub</div>
       <div className="flex justify-between text-sm">
         <div className="pt-3 text-sm text-gray-700">
@@ -27,8 +27,10 @@ export function Footer(): ReactElement {
           </p>
         </div>
         <div className="flex flex-col items-start  py-1 min-w-fit pl-10">
-          <div className="py-1 font-semibold">MY SOCIAL LINKS</div>
-          <div className="flex items-center justify-evenly w-full">
+          <div className="hidden sm:block py-1 font-semibold">
+            MY SOCIAL LINKS
+          </div>
+          <div className="flex flex-col space-y-10 sm:space-y-0 sm:flex-row items-center justify-around w-full">
             <Link
               href="https://twitter.com/aditya172001"
               className="focus:outline-none"

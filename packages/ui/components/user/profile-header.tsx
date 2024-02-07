@@ -18,16 +18,18 @@ export function ProfileHeader({
 }): ReactElement {
   return (
     <div
-      className="bg-cover bg-center h-52 mt-3 flex items-center justify-between px-5 text-white"
+      className="bg-cover bg-center h-52 mt-8 xl:mt-3 flex items-center justify-between px-5 text-white"
       style={{ backgroundImage: `url(${bgImageLink})` }}
     >
       <div className="flex items-center space-x-2 ">
         <img
           src={profileImage}
           alt="user profile image"
-          className="rounded-full h-32 border-white border-4 bg-violet-50"
+          className="rounded-full h-32 w-32 border-white border-4 bg-violet-50"
         />
-        <div className="font-semibold text-lg">{profileName}</div>
+        <div className="hidden sm:block font-semibold text-lg">
+          {profileName}
+        </div>
       </div>
       {isButtonPresent ? (
         <Link href={buttonLink} className="bg-violet-950 rounded-md px-3 py-1">

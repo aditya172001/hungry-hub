@@ -2,7 +2,6 @@ import { NextAuthOptions, getServerSession } from "next-auth";
 import { ReactElement } from "react";
 import { Dropdown } from "./dropdown";
 import { SigninAndSignupButton } from "./signin-and-signup-button";
-import { User } from "db";
 import { validateUserSession } from "../../../../apps/client/src/app/api/validateUserSession";
 import { userType } from "validation";
 
@@ -14,6 +13,7 @@ export async function ProfileDropdown({
   profileImage: string;
 }): Promise<ReactElement> {
   const session = await getServerSession(authOptions);
+  const myUser: userType = await validateUserSession(session);
 
   let userProfileName = "user_name";
   if (session?.user?.name) userProfileName = session.user.name;
@@ -25,9 +25,8 @@ export async function ProfileDropdown({
   if (session?.user?.image) {
     userProfileImage = session.user.image;
   } else {
-    const user: userType = await validateUserSession(session);
-    if (user.profilePicture) {
-      userProfileImage = user.profilePicture;
+    if (myUser.profilePicture) {
+      userProfileImage = myUser.profilePicture;
     }
   }
 
@@ -35,6 +34,7 @@ export async function ProfileDropdown({
     <div className="z-10">
       {session ? (
         <Dropdown
+          userType={myUser.userType}
           userProfileImage={userProfileImage}
           userProfileName={userProfileName}
         />

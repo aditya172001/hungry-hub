@@ -13,7 +13,7 @@ export function Collection({
   return (
     <Link
       href={"/coming-soon"}
-      className="bg-cover bg-center text-white h-40 w-72 my-5 rounded-md flex items-end p-2"
+      className="bg-cover bg-center text-white h-40 w-72 my-5 rounded-md flex items-end p-2 mx-2"
       style={{ backgroundImage: `url(${image})` }}
     >
       <div>

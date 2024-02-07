@@ -3,9 +3,9 @@ import { Collection } from "./collection";
 
 export function Collections(): ReactElement {
   return (
-    <div className="flex flex-col px-48">
+    <div className="flex flex-col px-4 sm:px-12 2xl:px-48">
       <div className="text-2xl">Collections</div>
-      <div className="flex justify-between space-x-5">
+      <div className="flex flex-wrap lg:flex-nowrap justify-around">
         <Collection
           collection="Veggie Friendly"
           image="/veggie-friendly.jpg"

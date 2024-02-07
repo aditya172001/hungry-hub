@@ -12,7 +12,7 @@ export function HomeHeader({
 }): ReactElement {
   return (
     <div
-      className="text-white bg-cover bg-center px-48"
+      className="text-white bg-cover bg-center px-4 sm:px-12 2xl:px-48"
       style={{
         backgroundImage: `url(/dash_img.jpg)`,
         backgroundSize: "cover",
@@ -23,8 +23,10 @@ export function HomeHeader({
     >
       <HomeAppbar authOptions={authOptions} profileImage={profileImage} />
       <div className="flex flex-col items-center pt-24">
-        <div className="text-7xl font-bold font-serif">hungryHub</div>
-        <div className="text-4xl font-semibold font-sans pt-6">
+        <div className="text-5xl sm:text-7xl font-bold font-serif">
+          hungryHub
+        </div>
+        <div className="text-2xl sm:text-4xl font-semibold font-sans pt-6">
           Discover the best food & drinks
         </div>
         <div className="p-8">

@@ -81,7 +81,7 @@ export function SearchBar(): ReactElement {
           />
           <input
             value={city}
-            className="p-1 sm:p-2 h-6 sm:h-10 w-24 sm:w-36 focus:outline-none"
+            className="p-1 sm:p-2 h-6 sm:h-10 w-16 sm:w-32 focus:outline-none text-sm sm:text-base"
             placeholder="city"
             onChange={(e) => setCity(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -96,13 +96,13 @@ export function SearchBar(): ReactElement {
           }`}
         >
           {isCityLoading && (
-            <div className="px-4 py-1 w-28 sm:w-44 rounded-md text-black h-fit">
+            <div className="px-2 sm:px-4 py-1 w-28 sm:w-40 rounded-md text-black h-fit text-sm sm:text-base">
               Loading...
             </div>
           )}
 
           {!isCityLoading && allCities.length === 0 && (
-            <div className="px-4 py-1 w-28 sm:w-44 rounded-md text-black h-fit">
+            <div className="px-2 sm:px-4 py-1 w-28 sm:w-40 rounded-md text-black h-fit text-sm sm:text-base">
               Not available
             </div>
           )}
@@ -117,7 +117,7 @@ export function SearchBar(): ReactElement {
                 .map((filteredCity, index) => (
                   <div
                     key={index}
-                    className="px-4 py-1 w-44 rounded-md text-black h-fit hover:bg-violet-200 hover:cursor-pointer"
+                    className="px-2 sm:px-4 py-1 w-28 sm:w-40 rounded-md text-black h-fit hover:bg-violet-200 hover:cursor-pointer text-sm sm:text-base"
                     onClick={() => handleSelectCity(filteredCity)}
                   >
                     {filteredCity}
@@ -126,7 +126,7 @@ export function SearchBar(): ReactElement {
               {allCities.filter((singleCity) =>
                 singleCity.toLowerCase().startsWith(city.toLowerCase())
               ).length === 0 && (
-                <div className="px-4 py-1 w-44 rounded-md text-black h-fit">
+                <div className="px-2 sm:px-4 py-1 w-28 sm:w-40 rounded-md text-black h-fit text-sm sm:text-base">
                   No matching city
                 </div>
               )}
@@ -138,7 +138,7 @@ export function SearchBar(): ReactElement {
         <MagnifyingGlassIcon className="hidden sm:block w-5 bg-white" />
         <input
           value={search}
-          className="p-1 sm:p-2 h-6 sm:h-10 w-60 sm:w-96 rounded-r-md focus:outline-none"
+          className="p-1 sm:p-2 h-6 sm:h-10 w-44 sm:w-80 rounded-r-md focus:outline-none  text-sm sm:text-base"
           placeholder="Search for a restaurant, cuisine or dish"
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleKeyDown}
