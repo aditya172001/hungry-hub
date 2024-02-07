@@ -25,7 +25,7 @@ export function ProfileHeader({
         <img
           src={profileImage}
           alt="user profile image"
-          className="rounded-full h-32 w-32 border-white border-4 bg-violet-50"
+          className="rounded-full h-28 sm:h-32 w-28 sm:w-32 border-white border-4 bg-violet-50"
         />
         <div className="hidden sm:block font-semibold text-lg">
           {profileName}

@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`bg-violet-50 ${inter.className}`}>
         <RecoilContextProvider>
           <TransparentBackground>{children}</TransparentBackground>
         </RecoilContextProvider>

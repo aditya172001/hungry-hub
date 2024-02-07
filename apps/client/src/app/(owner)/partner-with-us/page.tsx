@@ -7,11 +7,11 @@ export default function PartnerWithUs(): ReactElement {
   return (
     <main>
       <div
-        className=" px-48"
+        className=" px-4 sm:px-12 2xl:px-48"
         style={{
           backgroundImage: `url("/partner-with-us-bg.jpg")`,
           backgroundSize: "cover",
-          backgroundPosition: "0px -110px",
+          backgroundPosition: "50% 30%",
         }}
       >
         <div className="flex items-center justify-between pt-4">
@@ -27,35 +27,35 @@ export default function PartnerWithUs(): ReactElement {
           <div className=" text-4xl py-10">
             Partner with Hungryhub at 0% commission!
           </div>
-          <div className="py-10">
+          <div className="py-10 flex flex-wrap justify-around">
             <Link
               href={"/register-restaurant"}
-              className="rounded-md bg-violet-500 text-white py-4 px-12 mr-2"
+              className="rounded-md bg-violet-500 text-white py-2 sm:py-4 px-6 sm:px-12 m-2"
             >
               Register your restaurant
             </Link>
             <Link
               href={"/restaurants"}
-              className="rounded-md bg-white text-violet-500 py-4 px-8 ml-2"
+              className="rounded-md bg-white text-violet-500 py-2 sm:py-4 px-6 sm:px-8 m-2"
             >
               View your existing restaurants
             </Link>
           </div>
           <div className="pb-8 hover:cursor-pointer">
-            Need help? Please email us at imaginaryemail@imagine.com
+            Need help? Please email us at adityakumar172001@gmail.com
           </div>
         </div>
       </div>
       <div
-        className="px-48 py-20"
+        className=" px-4 sm:px-12 2xl:px-48 py-16"
         style={{
           backgroundImage: `url("/partner-with-us-bg2.jpg")`,
           backgroundSize: "cover",
           backgroundPosition: "0px -10px",
         }}
       >
-        <div className="text-4xl text-center pb-14">How it works?</div>
-        <div className="flex items-center justify-between">
+        <div className="text-4xl text-center pb-12">How it works?</div>
+        <div className="flex flex-wrap items-center justify-around">
           <StepsCard
             image="/step1.png"
             color="orange"

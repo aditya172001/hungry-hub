@@ -16,14 +16,14 @@ export async function HomeAppbar({
   const myUser = await validateUserSession(session);
   return (
     <div className="grid grid-cols-6 gap-2 py-5 items-center">
-      <div className=" col-span-4"></div>
+      <div className="col-span-4" />
       <Link
         href="/partner-with-us"
         className="hidden sm:block py-2 pr-10 focus:outline-none"
       >
         {myUser?.userType === "resOwner" ? "My Restaurants" : "Add Restaurant"}
       </Link>
-      <div className="flex flex-row-reverse">
+      <div className="flex justify-end col-span-2 sm:col-span-1">
         <ProfileDropdown
           authOptions={authOptions}
           profileImage={profileImage}

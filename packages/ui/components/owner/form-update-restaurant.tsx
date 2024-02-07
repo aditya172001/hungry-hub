@@ -244,7 +244,7 @@ export function FormUpdateRestaurant({
             <span className="sr-only">Use setting</span>
             <span
               aria-hidden="true"
-              className={`${dining ? "translate-x-6" : "translate-x-0"}
+              className={`${dining ? "translate-x-5" : "translate-x-0"}
               pointer-events-none inline-block h-4 sm:h-5 w-4 sm:w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
             />
           </Switch>
@@ -260,7 +260,7 @@ export function FormUpdateRestaurant({
             <span className="sr-only">Use setting</span>
             <span
               aria-hidden="true"
-              className={`${nightlife ? "translate-x-6" : "translate-x-0"}
+              className={`${nightlife ? "translate-x-5" : "translate-x-0"}
               pointer-events-none inline-block h-4 sm:h-5 w-4 sm:w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
             />
           </Switch>

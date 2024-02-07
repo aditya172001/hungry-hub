@@ -7,16 +7,16 @@ export function SigninAndSignupButton(): ReactElement {
   const router = useRouter();
 
   return (
-    <div>
+    <div className="flex">
       <button
-        className="pr-10 focus:outline-none"
+        className="pr-3 sm:pr-5 focus:outline-none"
         type="button"
         onClick={() => router.push("/signin")}
       >
         Signin
       </button>
       <button
-        className="pr-10 focus:outline-none"
+        className="focus:outline-none"
         type="button"
         onClick={() => router.push("/signup")}
       >

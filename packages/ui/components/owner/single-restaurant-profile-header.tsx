@@ -34,7 +34,7 @@ export function SingleRestaurantProfileHeader({
       style={{
         backgroundImage: `url(${bgImageLink})`,
         backgroundSize: "cover",
-        backgroundPosition: "0px -730px",
+        backgroundPosition: "50% 50%",
       }}
     >
       <div>
@@ -42,15 +42,17 @@ export function SingleRestaurantProfileHeader({
           <img
             src={profilePicture}
             alt="user profile image"
-            className="rounded-md h-40 w-60 object-cover border-white border-4 bg-violet-50"
+            className="hidden sm:block rounded-md h-40 w-60 object-cover border-white border-4 bg-violet-50"
           />
           <div>
-            <div className="font-semibold text-2xl py-2">{restaurantName}</div>
+            <div className="font-semibold text-xl sm:text-2xl sm:py-2">
+              {restaurantName}
+            </div>
             <div className="text-sm py-1">{description}</div>
             <ViewStarRating rating={rating} />
           </div>
         </div>
-        <div className="text-sm pt-4">
+        <div className="text-sm pt-2 sm:pt-4">
           <div>
             <span className="text-violet-500">Address : </span>
             <span>
@@ -73,7 +75,7 @@ export function SingleRestaurantProfileHeader({
       </div>
       <Link
         href={buttonLink}
-        className="bg-violet-950 rounded-md px-3 py-1 min-w-fit"
+        className="bg-violet-950 rounded-md px-3 py-1 min-w-fit text-sm sm:text-base"
       >
         {buttonText}
       </Link>
