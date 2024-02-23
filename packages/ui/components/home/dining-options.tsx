@@ -26,7 +26,6 @@ export function DiningOption({
   const setInitiateSearch = useSetRecoilState(initiateSearchState);
   const router = useRouter();
   function handleClick() {
-    console.log(city);
     if (city === "") {
       return window.scrollTo({ top: 0, behavior: "smooth" });
     }

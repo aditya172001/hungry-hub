@@ -88,8 +88,10 @@ export async function POST(request: NextRequest) {
 
     //validate user input
     const rawRestaurant = await request.json();
-    const parsedRestaurant = restaurantSchema.safeParse(rawRestaurant);
-    if (!parsedRestaurant.success) {
+    let parsedRestaurant;
+    try {
+      parsedRestaurant = await restaurantSchema.parseAsync(rawRestaurant);
+    } catch (error) {
       return NextResponse.json(
         { status: "error", message: "Invalid input" },
         { status: 400 }
@@ -105,7 +107,7 @@ export async function POST(request: NextRequest) {
       openingHours,
       dining,
       nightlife,
-    } = parsedRestaurant.data;
+    } = parsedRestaurant;
 
     //save the address of the new restaurant
     const newAddress = new Address(address);

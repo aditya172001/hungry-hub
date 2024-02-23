@@ -13,9 +13,16 @@ const orderSchema = new mongoose.Schema({
   },
   items: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Item",
-      required: true,
+      item: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item",
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        default: 1,
+        required: true,
+      },
     },
   ],
   orderDateTime: {

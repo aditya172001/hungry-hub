@@ -8,6 +8,7 @@ import { OrderType } from "types";
 
 export function IndividualOrder({ order }: { order: OrderType }): ReactElement {
   const [isopen, setIsOpen] = useState(false);
+  console.log(order);
   return (
     <div
       className="bg-white p-4 rounded-md border border-violet-200 my-2"
@@ -61,9 +62,9 @@ export function IndividualOrder({ order }: { order: OrderType }): ReactElement {
             <div className="font-semibold">Items :-</div>
           </div>
           <div className="flex space-x-5">
-            {order.items.map((item, index) => (
+            {order.items.map((it, index) => (
               <div key={index} className=" text-sm font-light text-violet-600">
-                {item.itemName}
+                {it.item.itemName}
               </div>
             ))}
           </div>

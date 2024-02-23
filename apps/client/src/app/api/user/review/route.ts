@@ -26,7 +26,6 @@ export async function POST(request: NextRequest) {
 
     //get info to be added in review and validate it
     const rawReview = await request.json();
-    console.log(rawReview);
     const parsedReview = reviewSchema.safeParse(rawReview);
     if (
       !parsedReview.success ||

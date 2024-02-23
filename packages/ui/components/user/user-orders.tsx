@@ -16,6 +16,7 @@ export function UserOrders({ spinner }: { spinner: string }): ReactElement {
     error,
     isLoading,
   } = useSWR<OrderType[]>("api/user/orders", fetcher);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-96">
@@ -36,8 +37,8 @@ export function UserOrders({ spinner }: { spinner: string }): ReactElement {
         <div className="py-2">
           {orders
             .sort((a, b) => (a.orderDateTime > b.orderDateTime ? -1 : 1))
-            .map((order, index) => {
-              return <IndividualOrder key={index} order={order} />;
+            .map((order) => {
+              return <IndividualOrder key={order.orderID} order={order} />;
             })}
         </div>
       ) : (

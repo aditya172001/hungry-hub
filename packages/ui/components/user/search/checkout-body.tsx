@@ -1,15 +1,18 @@
 "use client";
 
 import { useRecoilValue } from "recoil";
-import { cartDataState, cartPriceState } from "store";
+import { cartDataState } from "store";
 import { ClipboardDocumentListIcon } from "@heroicons/react/20/solid";
 import { CheckoutItem } from "./checkout-item";
 import { OrderPlaceModal } from "./order-place-modal";
 
 export function CheckoutBody() {
   const cart = useRecoilValue(cartDataState);
-  const cartPrice = useRecoilValue(cartPriceState);
   const { items } = cart;
+  const cartPrice =
+    Math.round(
+      items.reduce((sum, item) => sum + item.price * item.quantity, 0) * 100
+    ) / 100;
 
   return (
     <div>
@@ -18,14 +21,12 @@ export function CheckoutBody() {
           <ClipboardDocumentListIcon className="w-6" />
           <div>Items</div>
         </div>
-        {items.length !== 0 ? <OrderPlaceModal /> : ""}
+        {items.length !== 0 && <OrderPlaceModal />}
       </div>
-      {items.length !== 0 ? (
+      {items.length !== 0 && (
         <div className="flex flex-row-reverse p-2 text-lg">
           Total: ₹{cartPrice}
         </div>
-      ) : (
-        ""
       )}
       <div className="pt-2">
         {items.length !== 0 ? (

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Order } from "./order";
 
 const reviewSchema = new mongoose.Schema({
   user: {

@@ -1,17 +1,44 @@
 import { MinusIcon } from "@heroicons/react/20/solid";
-import { useSetRecoilState } from "recoil";
+import { PlusIcon } from "lucide-react";
+import { useRecoilState } from "recoil";
 import { cartDataState } from "store";
-import { ItemForUserMenuType } from "types";
+import { ItemForCartType } from "types";
 
-export function CheckoutItem({ item }: { item: ItemForUserMenuType }) {
-  const setCart = useSetRecoilState(cartDataState);
+export function CheckoutItem({ item }: { item: ItemForCartType }) {
+  const [cart, setCart] = useRecoilState(cartDataState);
+
+  function handleAddItemToCart() {
+    setCart((oldCartData) => {
+      return {
+        items: oldCartData.items.map((it) => {
+          if (it.itemID === item.itemID)
+            return { ...it, quantity: it.quantity + 1 };
+          else return it;
+        }),
+        restaurantID: cart.restaurantID,
+      };
+    });
+  }
 
   function handleRemoveItemFromCart() {
     setCart((oldCartData) => {
-      const updatedItems = oldCartData.items.filter(
-        (oldItem) => oldItem.itemID !== item.itemID
-      );
-      return { ...oldCartData, items: updatedItems };
+      if (item.quantity === 1) {
+        const updatedItems = oldCartData.items.filter(
+          (oldItem) => oldItem.itemID !== item.itemID
+        );
+        return { ...oldCartData, items: updatedItems };
+      } else {
+        return {
+          items: oldCartData.items.map((it) => {
+            if (it.itemID === item.itemID) {
+              return { ...it, quantity: it.quantity - 1 };
+            } else {
+              return it;
+            }
+          }),
+          restaurantID: oldCartData.restaurantID,
+        };
+      }
     });
   }
   return (
@@ -36,7 +63,14 @@ export function CheckoutItem({ item }: { item: ItemForUserMenuType }) {
         </div>
       </div>
       <div className="flex items-center justify-center min-w-fit px-2 hover:cursor-pointer">
-        <MinusIcon className="w-6" onClick={handleRemoveItemFromCart} />
+        <div className="flex items-center text-sm sm:text-base select-none">
+          <MinusIcon
+            className="w-4 sm:w-6"
+            onClick={handleRemoveItemFromCart}
+          />
+          <span className="w-2">{item.quantity}</span>
+          <PlusIcon className="w-4 sm:w-6" onClick={handleAddItemToCart} />
+        </div>
       </div>
     </div>
   );

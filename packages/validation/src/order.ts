@@ -1,8 +1,11 @@
 import { z } from "zod";
 
+export const orderIdSchema = z.object({ orderID: z.string() });
+export type orderIdType = z.infer<typeof orderIdSchema>;
+
 export const orderSchema = z.object({
   restaurant: z.string(),
-  items: z.array(z.string()),
+  items: z.array(z.object({ item: z.string(), quantity: z.number() })),
 });
 export type orderType = z.infer<typeof orderSchema>;
 

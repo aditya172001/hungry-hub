@@ -37,19 +37,3 @@ export const cartDataState = atom<CartDataType>({
   key: "cartDataState",
   default: { items: [], restaurantID: "" },
 });
-
-export const cartPriceState = selector({
-  key: "cartPriceState",
-  get: ({ get }) => {
-    const cartData = get(cartDataState);
-    if (
-      !cartData.items ||
-      !cartData.restaurantID ||
-      cartData.items.length === 0
-    )
-      return 0;
-    const items = cartData.items;
-    const price = items.reduce((sum, item) => sum + item.price, 0);
-    return price;
-  },
-});

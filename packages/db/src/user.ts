@@ -1,6 +1,4 @@
-import mongoose, { Document } from "mongoose";
-import { Address } from "./address";
-import { Restaurant } from "./restaurant";
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   userName: {

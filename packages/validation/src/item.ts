@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { courseSchema, cuisineSchema, vegSchema } from "./dishes";
+import { imageUrlSchema } from "./images";
 
 //api/owner/menu
 //for DELETE
@@ -11,7 +12,7 @@ export const itemPostSchema = z.object({
   restaurant: z.string(),
   itemName: z.string().min(4),
   description: z.string().min(4),
-  imageURL: z.string().url(),
+  imageURL: imageUrlSchema,
   price: z.number(),
   cuisine: cuisineSchema,
   course: courseSchema,
@@ -25,7 +26,7 @@ export const itemPutSchema = z.object({
   restaurantID: z.string(),
   itemName: z.string().min(4).optional(),
   description: z.string().min(4).optional(),
-  imageURL: z.string().url().optional(),
+  imageURL: imageUrlSchema.optional(),
   price: z.number().optional(),
   cuisine: cuisineSchema.optional(),
   course: courseSchema.optional(),

@@ -16,7 +16,7 @@ export function HomeHeader({
       style={{
         backgroundImage: `url(/dash_img.jpg)`,
         backgroundSize: "cover",
-        backgroundPosition: "0px -10px",
+        backgroundPosition: "50% 5%",
         width: "100vw",
         height: "560px",
       }}

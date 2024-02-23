@@ -14,7 +14,7 @@ export interface OrderType {
   orderID: string;
   restaurantName: string;
   restaurantProfilePicture: string;
-  items: itemPutType[];
+  items: { item: itemPutType; quantity: number }[];
   orderStatus: orderStatusType;
   paymentStatus: paymentStatusType;
   deliveryAddress: addressType;
@@ -25,7 +25,7 @@ export interface ReviewType {
   reviewID: string;
   restaurantName: string;
   restaurantProfilePicture: string;
-  items: itemPutType[];
+  items: { item: itemPutType; quantity: number }[];
   rating: number;
   reviewText: string | undefined;
   deliveryAddress: addressType;
@@ -77,7 +77,19 @@ export interface ItemForUserMenuType {
   veg: vegType;
 }
 
+export interface ItemForCartType {
+  itemID: string;
+  quantity: number;
+  itemName: string;
+  description: string;
+  imageURL: string;
+  price: number;
+  cuisine: cuisineType;
+  course: courseType;
+  veg: vegType;
+}
+
 export interface CartDataType {
-  items: ItemForUserMenuType[];
+  items: ItemForCartType[];
   restaurantID: string;
 }

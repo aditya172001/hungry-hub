@@ -1,40 +1,39 @@
 "use client";
+
 import { Dialog, Transition } from "@headlessui/react";
 import { ShoppingBagIcon } from "@heroicons/react/20/solid";
-import { Fragment, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { cartDataState, cartPriceState } from "store";
+import { Fragment, useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { cartDataState } from "store";
 import { GiveStarRating } from "./give-star-rating";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+import { useLocalStorage } from "../../useLocalStorage";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+);
 
 export function OrderPlaceModal() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   //get info of items in cart
   const [cart, setCart] = useRecoilState(cartDataState);
-  const cartPrice = useRecoilValue(cartPriceState);
 
   //initialize data order placing and giving review
   const [rating, setRating] = useState(4);
   const [reviewText, setReviewText] = useState("");
-  const [orderID, setOrderID] = useState<string | undefined>(undefined);
-  const { items: myitems, restaurantID } = cart;
-  const items = myitems.map((item) => item.itemID);
+  const [orderID, setOrderID] = useLocalStorage("orderID", "");
+  const { items, restaurantID } = cart;
 
-  const [isOrderPlaceOpen, setIsOrderPlaceOpen] = useState(false);
   const [isGiveReviewOpen, setIsGiveReviewOpen] = useState(false);
   const [isCheckoutButtonDisabled, setIsCheckoutButtonDisabled] =
     useState(false);
 
-  function openOrderPlaceModal() {
-    setIsOrderPlaceOpen(true);
-  }
-  function closeOrderPlaceModal() {
-    setIsOrderPlaceOpen(false);
-  }
   function openGiveReviewModal() {
     setIsGiveReviewOpen(true);
   }
@@ -43,6 +42,42 @@ export function OrderPlaceModal() {
     router.push("/search-restaurants");
     setCart({ items: [], restaurantID: "" });
   }
+  async function updateOrderInDB() {
+    const response = await axios.patch("/api/user/order", { orderID });
+    if (response.status === 200) {
+      toast.success(response.data.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+    openGiveReviewModal();
+  }
+
+  // todo
+  useEffect(() => {
+    if (searchParams.get("success")) {
+      try {
+        updateOrderInDB();
+        localStorage.removeItem("orderID");
+      } catch (error: any) {
+        console.log("error :", error);
+        if (error.response?.data?.message) {
+          toast.error(error.response.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          toast.error(error, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      }
+    }
+
+    if (searchParams.get("canceled")) {
+      toast.error("Order canceled", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }, []);
 
   async function handleGiveReview() {
     try {
@@ -74,23 +109,25 @@ export function OrderPlaceModal() {
 
   async function handleCheckout() {
     setIsCheckoutButtonDisabled(true);
-    closeOrderPlaceModal();
     try {
       const response = await axios.post("/api/user/order", {
         restaurant: restaurantID,
-        items,
+        items: items.map((it) => {
+          return {
+            item: it.itemID,
+            quantity: it.quantity,
+          };
+        }),
       });
 
       setOrderID(response.data.orderID);
 
-      toast.success(response.data.message, {
-        position: toast.POSITION.TOP_CENTER,
-      });
-
-      openGiveReviewModal();
+      const stripe = await stripePromise;
+      if (!stripe || !response.data.url)
+        throw new Error("Internal Server Error");
+      else router.push(response.data.url);
     } catch (error: any) {
-      setIsCheckoutButtonDisabled(false);
-      if (error.response.data.message) {
+      if (error.response?.data?.message) {
         toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
@@ -99,6 +136,8 @@ export function OrderPlaceModal() {
           position: toast.POSITION.TOP_CENTER,
         });
       }
+    } finally {
+      setIsCheckoutButtonDisabled(false);
     }
   }
 
@@ -110,75 +149,11 @@ export function OrderPlaceModal() {
           isCheckoutButtonDisabled ? "disabled:shadow disabled:text-black" : ""
         }`}
         disabled={isCheckoutButtonDisabled}
-        onClick={openOrderPlaceModal}
+        onClick={handleCheckout}
       >
         <div>Checkout</div>
         <ShoppingBagIcon className="w-6 text-violet-700" />
       </button>
-      {/* this is place order modal  */}
-      <Transition appear show={isOrderPlaceOpen} as={Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-10"
-          onClose={closeOrderPlaceModal}
-        >
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full max-w-xs transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    Place order
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      The total price is : ₹{cartPrice}
-                    </p>
-                  </div>
-                  <div className="mt-4 space-x-2 flex justify-between">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
-                      onClick={closeOrderPlaceModal}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-violet-100 px-4 py-2 text-sm font-medium text-violet-900 hover:bg-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
-                      onClick={handleCheckout}
-                    >
-                      Confirm
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
       {/* below is review modal  */}
       <Transition appear show={isGiveReviewOpen} as={Fragment}>
         <Dialog

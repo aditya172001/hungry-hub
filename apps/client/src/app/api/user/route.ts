@@ -48,14 +48,17 @@ export async function PUT(request: NextRequest) {
 
     //validate userdata
     const rawUser = await request.json();
-    const parsedUser = userSchema.safeParse(rawUser);
-    if (!parsedUser.success) {
+    let parsedUser;
+    try {
+      parsedUser = await userSchema.parseAsync(rawUser);
+    } catch (error) {
       return NextResponse.json(
         { status: "error", message: "Invalid input" },
         { status: 400 }
       );
     }
-    const { userName, profilePicture, userType, address } = parsedUser.data;
+
+    const { userName, profilePicture, userType, address } = parsedUser;
 
     let updatedUserData: UserDataType = {};
     if (userName) updatedUserData.userName = userName;

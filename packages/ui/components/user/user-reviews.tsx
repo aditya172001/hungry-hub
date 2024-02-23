@@ -1,10 +1,10 @@
 // "use client"
 
 import axios from "axios";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { ReviewType } from "types";
 import { IndividualReview } from "./individual-review";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import Image from "next/image";
 
 function fetcher() {
@@ -16,7 +16,7 @@ export function UserReviews({ spinner }: { spinner: string }): ReactElement {
     data: reviews,
     error,
     isLoading,
-  } = useSWR<ReviewType[]>("api/user/orders", fetcher);
+  } = useSWR<ReviewType[]>("api/user/reviews", fetcher);
 
   if (isLoading) {
     return (
@@ -33,13 +33,13 @@ export function UserReviews({ spinner }: { spinner: string }): ReactElement {
   }
 
   return (
-    <div className="">
+    <div>
       {reviews ? (
         <div className="py-2">
           {reviews
             .sort((a, b) => (a.reviewDateTime > b.reviewDateTime ? -1 : 1))
-            .map((review, index) => {
-              return <IndividualReview key={index} review={review} />;
+            .map((review) => {
+              return <IndividualReview key={review.reviewID} review={review} />;
             })}
         </div>
       ) : (

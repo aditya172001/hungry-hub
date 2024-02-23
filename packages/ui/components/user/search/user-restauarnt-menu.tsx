@@ -1,12 +1,17 @@
 "use client";
 
-import { ItemForUserMenuType } from "types";
+import { CartDataType, ItemForCartType, ItemForUserMenuType } from "types";
 import { PlusIcon, MinusIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { cartDataState } from "store";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+function getQuantity(cart: CartDataType, item: ItemForUserMenuType): number {
+  const myItem = cart.items.find((cartItem) => cartItem.itemID === item.itemID);
+  return myItem ? myItem.quantity : 0;
+}
 
 export function UserRestaurantMenuItem({
   myItem,
@@ -15,16 +20,14 @@ export function UserRestaurantMenuItem({
   myItem: string;
   restaurantID: string;
 }) {
-  const item = JSON.parse(myItem) as ItemForUserMenuType;
+  const item = JSON.parse(myItem) as ItemForCartType;
   const [cart, setCart] = useRecoilState(cartDataState);
-  const [itemAdded, setItemAdded] = useState(
-    cart.items.some((cartItem) => cartItem.itemID === item.itemID)
-  );
+  const [quantity, setQuantity] = useState(getQuantity(cart, item));
 
   function handleAddItemToCart() {
     if (cart.items.length === 0) {
-      setCart({ items: [item], restaurantID });
-      setItemAdded(true);
+      setCart({ items: [{ ...item, quantity: 1 }], restaurantID });
+      setQuantity(1);
     } else {
       setCart((oldCartData) => {
         if (restaurantID !== oldCartData.restaurantID) {
@@ -36,20 +39,48 @@ export function UserRestaurantMenuItem({
           );
           return oldCartData;
         } else {
-          setItemAdded(true);
-          return { items: [...oldCartData.items, item], restaurantID };
+          setQuantity((quantity) => quantity + 1);
+          //item already exists in cart
+          if (oldCartData.items.some((it) => it.itemID === item.itemID)) {
+            return {
+              items: oldCartData.items.map((it) => {
+                if (it.itemID === item.itemID)
+                  return { ...it, quantity: it.quantity + 1 };
+                else return it;
+              }),
+              restaurantID,
+            };
+          } else {
+            return {
+              items: [...oldCartData.items, { ...item, quantity: 1 }],
+              restaurantID,
+            };
+          }
         }
       });
     }
   }
   function handleRemoveItemFromCart() {
     setCart((oldCartData) => {
-      const updatedItems = oldCartData.items.filter(
-        (oldItem) => oldItem.itemID !== item.itemID
-      );
-      return { ...oldCartData, items: updatedItems };
+      if (quantity === 1) {
+        const updatedItems = oldCartData.items.filter(
+          (oldItem) => oldItem.itemID !== item.itemID
+        );
+        return { ...oldCartData, items: updatedItems };
+      } else {
+        return {
+          items: oldCartData.items.map((it) => {
+            if (it.itemID === item.itemID) {
+              return { ...it, quantity: it.quantity - 1 };
+            } else {
+              return it;
+            }
+          }),
+          restaurantID: oldCartData.restaurantID,
+        };
+      }
     });
-    setItemAdded(false);
+    setQuantity((quantity) => quantity - 1);
   }
   return (
     <>
@@ -81,17 +112,18 @@ export function UserRestaurantMenuItem({
         <div
           className={`flex items-center justify-center px-2 hover:cursor-pointer `}
         >
-          <div
-            className={`transition-all duration-300 ${
-              itemAdded ? "rotate-180" : "rotate-90"
-            }`}
-          >
-            {itemAdded ? (
-              <MinusIcon className="w-6" onClick={handleRemoveItemFromCart} />
-            ) : (
-              <PlusIcon className="w-6" onClick={handleAddItemToCart} />
-            )}
-          </div>
+          {quantity > 0 ? (
+            <div className="flex items-center text-sm sm:text-base select-none">
+              <MinusIcon
+                className="w-4 sm:w-6"
+                onClick={handleRemoveItemFromCart}
+              />
+              <span className="w-2">{quantity}</span>
+              <PlusIcon className="w-4 sm:w-6" onClick={handleAddItemToCart} />
+            </div>
+          ) : (
+            <PlusIcon className="w-4 sm:w-6" onClick={handleAddItemToCart} />
+          )}
         </div>
       </div>
     </>

@@ -85,6 +85,13 @@ export async function PUT(request: NextRequest, context: any) {
     }
     restaurantID = parsedRestaurantID.data;
 
+    if (!myUser.restaurants.includes(restaurantID)) {
+      return NextResponse.json(
+        { status: "error", message: "Restaurant does not belong to user" },
+        { status: 403 }
+      );
+    }
+
     let {
       restaurantName,
       description,
@@ -94,9 +101,19 @@ export async function PUT(request: NextRequest, context: any) {
       dining,
       nightlife,
     } = await request.json();
+
+    let parsedProfilePicture;
+    try {
+      parsedProfilePicture =
+        await profilePictureSchema.parseAsync(profilePicture);
+    } catch (error) {
+      return NextResponse.json(
+        { status: "error", message: "Invalid Profile Picture URL" },
+        { status: 400 }
+      );
+    }
     const parsedRestaurantName = nameSchema.safeParse(restaurantName);
     const parsedDescription = descriptionSchema.safeParse(description);
-    const parsedProfilePicture = profilePictureSchema.safeParse(profilePicture);
     const parsedAddress = addressSchema.safeParse(address);
     const parsedOpeningHours = openingHoursSchema.safeParse(openingHours);
     const parsedDining = diningSchema.safeParse(dining);
@@ -105,7 +122,6 @@ export async function PUT(request: NextRequest, context: any) {
     if (
       !parsedRestaurantName.success ||
       !parsedDescription.success ||
-      !parsedProfilePicture.success ||
       !parsedAddress.success ||
       !parsedOpeningHours.success ||
       !parsedDining.success ||
@@ -159,7 +175,7 @@ export async function PUT(request: NextRequest, context: any) {
   }
 }
 
-//api current not in use
+//api currently not in use
 //DELETE a restaurant
 export async function DELETE(request: NextRequest, context: any) {
   try {

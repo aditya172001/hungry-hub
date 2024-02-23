@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { addressSchema } from "./address";
+import { imageUrlSchema } from "./images";
 
 //restaurant type is dine-out, night-life, online-order
 export const restaurantOptionSchema = z.enum([
@@ -20,7 +21,7 @@ export type nameType = z.infer<typeof nameSchema>;
 export const descriptionSchema = z.string().optional();
 export type descriptionType = z.infer<typeof descriptionSchema>;
 
-export const profilePictureSchema = z.string().url().optional();
+export const profilePictureSchema = imageUrlSchema.optional();
 export type profilePictureType = z.infer<typeof profilePictureSchema>;
 
 export const openingHoursSchema = z.object({
@@ -39,7 +40,7 @@ export type nightlifeType = z.infer<typeof nightlifeSchema>;
 export const restaurantSchema = z.object({
   restaurantName: z.string(),
   description: z.string(),
-  profilePicture: z.string().url(),
+  profilePicture: imageUrlSchema,
   address: addressSchema,
   openingHours: z.object({
     open: z.string(),

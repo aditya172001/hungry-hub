@@ -67,9 +67,9 @@ export function IndividualReview({
             <div className="font-semibold">Items :-</div>
           </div>
           <div className="flex space-x-5">
-            {review.items.map((item, index) => (
+            {review.items.map((it, index) => (
               <div key={index} className=" text-sm font-light text-violet-600">
-                {item.itemName}
+                {it.item.itemName}
               </div>
             ))}
           </div>

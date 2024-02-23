@@ -65,8 +65,10 @@ export async function POST(request: NextRequest) {
 
     //validate user input
     const rawItem = await request.json();
-    const parsedItem = itemPostSchema.safeParse(rawItem);
-    if (!parsedItem.success) {
+    let parsedItem;
+    try {
+      parsedItem = await itemPostSchema.parseAsync(rawItem);
+    } catch (error) {
       return NextResponse.json(
         { status: "error", message: "Invalid input" },
         { status: 400 }
@@ -82,7 +84,7 @@ export async function POST(request: NextRequest) {
       cuisine,
       course,
       veg,
-    } = parsedItem.data;
+    } = parsedItem;
 
     //check if restaurant belongs to the user
     const restaurantExistsInUser = myUser.restaurants.some(
@@ -159,13 +161,16 @@ export async function PUT(request: NextRequest) {
 
     //validate input
     const rawItem = await request.json();
-    const parsedItem = itemPutSchema.safeParse(rawItem);
-    if (!parsedItem.success) {
+    let parsedItem;
+    try {
+      parsedItem = await itemPutSchema.parseAsync(rawItem);
+    } catch (error) {
       return NextResponse.json(
         { status: "error", message: "Invalid input" },
         { status: 400 }
       );
     }
+
     const {
       itemID,
       restaurantID,
@@ -176,7 +181,7 @@ export async function PUT(request: NextRequest) {
       cuisine,
       course,
       veg,
-    } = parsedItem.data;
+    } = parsedItem;
 
     //check if the restaurant which the item belongs to also belongs to the current user
     const myItem = await Item.findById(itemID);

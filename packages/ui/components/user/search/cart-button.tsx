@@ -13,7 +13,7 @@ export function CartButton() {
       <ShoppingCartIcon className="w-9 hover:cursor-pointer text-gray-700" />
       {cart.items.length ? (
         <div className="absolute inset-x-7 inset-y-0 bg-violet-500 w-5 h-5 rounded-full text-white text-sm flex justify-center">
-          {cart.items.length}
+          {cart.items.reduce((acc, val) => acc + val.quantity, 0)}
         </div>
       ) : (
         ""
