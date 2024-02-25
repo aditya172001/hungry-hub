@@ -12,6 +12,8 @@ import { useRouter } from "next/navigation";
 import { MapPinIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 
+export const dynamic = "force-dynamic";
+
 export function SearchBar(): ReactElement {
   const router = useRouter();
   const [city, setCity] = useRecoilState(cityState);

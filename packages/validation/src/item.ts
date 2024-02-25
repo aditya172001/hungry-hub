@@ -10,8 +10,14 @@ export type itemIdType = z.infer<typeof itemIdSchema>;
 //for POST
 export const itemPostSchema = z.object({
   restaurant: z.string(),
-  itemName: z.string().min(4),
-  description: z.string().min(4),
+  itemName: z
+    .string()
+    .min(3, { message: "Item name must be at least 3 characters long" })
+    .max(30, { message: "Item name cannot exceed 30 characters" }),
+  description: z
+    .string()
+    .min(3, { message: "Description must be at least 3 characters long" })
+    .max(80, { message: "Description cannot exceed 80 characters" }),
   imageURL: imageUrlSchema,
   price: z.number(),
   cuisine: cuisineSchema,
@@ -24,8 +30,16 @@ export type itemPostType = z.infer<typeof itemPostSchema>;
 export const itemPutSchema = z.object({
   itemID: z.string(),
   restaurantID: z.string(),
-  itemName: z.string().min(4).optional(),
-  description: z.string().min(4).optional(),
+  itemName: z
+    .string()
+    .min(3, { message: "Item name must be at least 3 characters long" })
+    .max(30, { message: "Item name cannot exceed 30 characters" })
+    .optional(),
+  description: z
+    .string()
+    .min(3, { message: "Description must be at least 3 characters long" })
+    .max(80, { message: "Description cannot exceed 80 characters" })
+    .optional(),
   imageURL: imageUrlSchema.optional(),
   price: z.number().optional(),
   cuisine: cuisineSchema.optional(),

@@ -119,10 +119,10 @@ export function UserRestaurantMenuItem({
                 onClick={handleRemoveItemFromCart}
               />
               <span className="w-2">{quantity}</span>
-              <PlusIcon className="w-4 sm:w-6" onClick={handleAddItemToCart} />
+              <PlusIcon className="w-4 sm:w-5" onClick={handleAddItemToCart} />
             </div>
           ) : (
-            <PlusIcon className="w-4 sm:w-6" onClick={handleAddItemToCart} />
+            <PlusIcon className="w-4 sm:w-5" onClick={handleAddItemToCart} />
           )}
         </div>
       </div>

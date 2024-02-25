@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
+import { isProgressBarVisibleState } from "store";
+import { useSetRecoilState } from "recoil";
 
 export function FormSignin({
   googleicon,
@@ -18,9 +20,11 @@ export function FormSignin({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [myerror, setMyerror] = useState("");
+  const setIsProgressBarVisible = useSetRecoilState(isProgressBarVisibleState);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsProgressBarVisible(true);
     try {
       const res = await signIn("credentials", {
         redirect: false,
@@ -48,6 +52,8 @@ export function FormSignin({
 
       setEmail("");
       setPassword("");
+    } finally {
+      setIsProgressBarVisible(false);
     }
   }
 

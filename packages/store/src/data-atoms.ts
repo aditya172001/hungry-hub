@@ -37,3 +37,8 @@ export const cartDataState = atom<CartDataType>({
   key: "cartDataState",
   default: { items: [], restaurantID: "" },
 });
+
+export const isProgressBarVisibleState = atom<boolean>({
+  key: "isProgressBarVisibleState",
+  default: false,
+});

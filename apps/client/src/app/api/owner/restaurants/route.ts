@@ -5,6 +5,7 @@ import { authOptions } from "../../auth/[...nextauth]/options";
 import { validateUserSession } from "../../validateUserSession";
 import { restaurantSchema } from "validation";
 import { RestaurantInfoType } from "types";
+import { ZodError } from "zod";
 
 //api currently not in use
 //get general info of all restaurants of the user
@@ -92,8 +93,17 @@ export async function POST(request: NextRequest) {
     try {
       parsedRestaurant = await restaurantSchema.parseAsync(rawRestaurant);
     } catch (error) {
+      if (error instanceof ZodError) {
+        return NextResponse.json(
+          {
+            status: "error",
+            message: error.errors[0].message,
+          },
+          { status: 400 }
+        );
+      }
       return NextResponse.json(
-        { status: "error", message: "Invalid input" },
+        { status: "error", message: "Invalid Input" },
         { status: 400 }
       );
     }

@@ -6,6 +6,8 @@ import Image from "next/image";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { isProgressBarVisibleState } from "store";
+import { useSetRecoilState } from "recoil";
 
 export function FormUpdateUser({
   erroricon,
@@ -21,6 +23,7 @@ export function FormUpdateUser({
   const [street, setStreet] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [myerror, setMyerror] = useState("");
+  const setIsProgressBarVisible = useSetRecoilState(isProgressBarVisibleState);
 
   //func to fetch user data
   async function fetchUserData() {
@@ -36,7 +39,6 @@ export function FormUpdateUser({
       setPostalCode(user.address?.postalCode);
     } catch (error) {
       console.error(error);
-      //redirect to error page
     }
   }
 
@@ -47,6 +49,7 @@ export function FormUpdateUser({
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsProgressBarVisible(true);
     try {
       const response = await axios.put("/api/user", {
         userName,
@@ -70,6 +73,8 @@ export function FormUpdateUser({
         setMyerror("Internal Server error");
       }
       fetchUserData();
+    } finally {
+      setIsProgressBarVisible(false);
     }
   }
 

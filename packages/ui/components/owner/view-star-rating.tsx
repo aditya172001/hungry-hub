@@ -17,5 +17,5 @@ export function ViewStarRating({ rating }: { rating: number }): ReactElement {
       );
     }
   }
-  return <div className="flex items-center gap-2">{stars}</div>;
+  return <div className="hidden sm:flex items-center gap-2">{stars}</div>;
 }

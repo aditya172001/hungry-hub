@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { User, ensureDbConnection } from "db";
 import bcrypt from "bcryptjs";
 import { emailSchema, singupSchema } from "validation";
+import { ZodError } from "zod";
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,19 +10,25 @@ export async function POST(request: NextRequest) {
 
     //validate data
     const rawUser = await request.json();
-    const parsedUser = singupSchema.safeParse(rawUser);
-    if (!parsedUser.success) {
-      let message = "Invalid user data";
-      if (rawUser?.password?.length < 4) {
-        message = "password should be atleast 4 characters long";
+    let parsedUser;
+    try {
+      parsedUser = singupSchema.parse(rawUser);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return NextResponse.json(
+          {
+            status: "error",
+            message: error.errors[0].message,
+          },
+          { status: 400 }
+        );
       }
-      if (!emailSchema.safeParse(rawUser.email).success) {
-        message = "Invalid email";
-      }
-
-      return NextResponse.json({ status: "error", message }, { status: 400 });
+      return NextResponse.json(
+        { status: "error", message: "Invalid Input" },
+        { status: 400 }
+      );
     }
-    const { userName, email, password } = parsedUser.data;
+    const { userName, email, password } = parsedUser;
 
     const userAlreadyExists = await User.findOne({ email });
     if (userAlreadyExists) {

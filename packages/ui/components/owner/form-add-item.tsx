@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Switch } from "@headlessui/react";
 import { useParams } from "next/navigation";
 import { courseType, cuisineType } from "validation";
+import { isProgressBarVisibleState } from "store";
+import { useSetRecoilState } from "recoil";
 
 export function FormAddItem({
   erroricon,
@@ -30,6 +32,7 @@ export function FormAddItem({
 
   const [myerror, setMyerror] = useState("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+  const setIsProgressBarVisible = useSetRecoilState(isProgressBarVisibleState);
 
   const cuisineOptions = [
     "Indian",
@@ -47,6 +50,7 @@ export function FormAddItem({
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitDisabled(true);
+    setIsProgressBarVisible(true);
     try {
       const response = await axios.post(`/api/owner/restaurants/menu`, {
         restaurant: restaurantID,
@@ -75,6 +79,8 @@ export function FormAddItem({
       } else {
         setMyerror("Internal Server error");
       }
+    } finally {
+      setIsProgressBarVisible(false);
     }
   }
 

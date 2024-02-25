@@ -55,7 +55,7 @@ export function Dropdown({
         className="absolute right-4 sm:right-12 2xl:right-48 mt-2 w-32 bg-white border border-violet-200 rounded-md shadow-lg hover:cursor-pointer z-10"
       >
         <div
-          className="text-black flex justify-center p-1 hover:bg-violet-200"
+          className="text-black flex justify-center p-1 hover:bg-violet-200 rounded-[5px]"
           onClick={() => {
             setIsOpen(false);
             router.push("/profile");
@@ -64,14 +64,14 @@ export function Dropdown({
           Profile
         </div>
         <div
-          className="text-black flex justify-center p-1 hover:bg-violet-200"
+          className="text-black flex justify-center p-1 hover:bg-violet-200 rounded-[5px]"
           onClick={() => signOut({ callbackUrl: "/" })}
         >
           Signout
         </div>
         <Link
           href="/partner-with-us"
-          className="flex sm:hidden text-black justify-center p-1 hover:bg-violet-200"
+          className="flex sm:hidden text-black justify-center p-1 hover:bg-violet-200 rounded-[5px]"
         >
           {userType === "resOwner" ? "My Restaurants" : "Add Restaurant"}
         </Link>

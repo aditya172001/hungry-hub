@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { validateUserSession } from "../validateUserSession";
 import { addressType, userSchema } from "validation";
+import { ZodError } from "zod";
 
 //user to get user info
 export async function GET(request: NextRequest) {
@@ -52,8 +53,17 @@ export async function PUT(request: NextRequest) {
     try {
       parsedUser = await userSchema.parseAsync(rawUser);
     } catch (error) {
+      if (error instanceof ZodError) {
+        return NextResponse.json(
+          {
+            status: "error",
+            message: error.errors[0].message,
+          },
+          { status: 400 }
+        );
+      }
       return NextResponse.json(
-        { status: "error", message: "Invalid input" },
+        { status: "error", message: "Invalid Input" },
         { status: 400 }
       );
     }

@@ -21,7 +21,7 @@ export function CheckoutBody() {
           <ClipboardDocumentListIcon className="w-6" />
           <div>Items</div>
         </div>
-        {items.length !== 0 && <OrderPlaceModal />}
+        <OrderPlaceModal />
       </div>
       {items.length !== 0 && (
         <div className="flex flex-row-reverse p-2 text-lg">

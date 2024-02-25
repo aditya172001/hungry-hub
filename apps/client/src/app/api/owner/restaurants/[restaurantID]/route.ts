@@ -13,6 +13,7 @@ import {
   profilePictureSchema,
   restaurantIdSchema,
 } from "validation";
+import { ZodError } from "zod";
 
 //GET detailed info of a restaurant
 export async function GET(request: NextRequest, context: any) {
@@ -102,33 +103,34 @@ export async function PUT(request: NextRequest, context: any) {
       nightlife,
     } = await request.json();
 
-    let parsedProfilePicture;
+    let parsedProfilePicture,
+      parsedRestaurantName,
+      parsedDescription,
+      parsedAddress,
+      parsedOpeningHours,
+      parsedDining,
+      parsedNightlife;
     try {
       parsedProfilePicture =
         await profilePictureSchema.parseAsync(profilePicture);
+      parsedRestaurantName = nameSchema.parse(restaurantName);
+      parsedDescription = descriptionSchema.parse(description);
+      parsedAddress = addressSchema.parse(address);
+      parsedOpeningHours = openingHoursSchema.parse(openingHours);
+      parsedDining = diningSchema.parse(dining);
+      parsedNightlife = nightlifeSchema.parse(nightlife);
     } catch (error) {
+      if (error instanceof ZodError) {
+        return NextResponse.json(
+          {
+            status: "error",
+            message: error.errors[0].message,
+          },
+          { status: 400 }
+        );
+      }
       return NextResponse.json(
-        { status: "error", message: "Invalid Profile Picture URL" },
-        { status: 400 }
-      );
-    }
-    const parsedRestaurantName = nameSchema.safeParse(restaurantName);
-    const parsedDescription = descriptionSchema.safeParse(description);
-    const parsedAddress = addressSchema.safeParse(address);
-    const parsedOpeningHours = openingHoursSchema.safeParse(openingHours);
-    const parsedDining = diningSchema.safeParse(dining);
-    const parsedNightlife = nightlifeSchema.safeParse(nightlife);
-
-    if (
-      !parsedRestaurantName.success ||
-      !parsedDescription.success ||
-      !parsedAddress.success ||
-      !parsedOpeningHours.success ||
-      !parsedDining.success ||
-      !parsedNightlife.success
-    ) {
-      return NextResponse.json(
-        { status: "error", message: "Invalid input" },
+        { status: "error", message: "Invalid Input" },
         { status: 400 }
       );
     }

@@ -65,11 +65,11 @@ export function CheckoutItem({ item }: { item: ItemForCartType }) {
       <div className="flex items-center justify-center min-w-fit px-2 hover:cursor-pointer">
         <div className="flex items-center text-sm sm:text-base select-none">
           <MinusIcon
-            className="w-4 sm:w-6"
+            className="w-4 sm:w-5"
             onClick={handleRemoveItemFromCart}
           />
           <span className="w-2">{item.quantity}</span>
-          <PlusIcon className="w-4 sm:w-6" onClick={handleAddItemToCart} />
+          <PlusIcon className="w-4 sm:w-5" onClick={handleAddItemToCart} />
         </div>
       </div>
     </div>

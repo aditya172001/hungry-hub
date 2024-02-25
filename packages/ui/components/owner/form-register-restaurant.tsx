@@ -7,6 +7,8 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Switch } from "@headlessui/react";
+import { isProgressBarVisibleState } from "store";
+import { useSetRecoilState } from "recoil";
 
 export function FormRegisterRestaurant({
   erroricon,
@@ -31,9 +33,11 @@ export function FormRegisterRestaurant({
   const [myerror, setMyerror] = useState("");
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
     useState(false);
+  const setIsProgressBarVisible = useSetRecoilState(isProgressBarVisibleState);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsProgressBarVisible(true);
     try {
       setIsRegisterButtonDisabled(true);
       const response = await axios.post("/api/owner/restaurants", {
@@ -62,6 +66,8 @@ export function FormRegisterRestaurant({
       } else {
         setMyerror("Internal Server error");
       }
+    } finally {
+      setIsProgressBarVisible(false);
     }
   }
 

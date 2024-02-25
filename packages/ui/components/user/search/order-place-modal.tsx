@@ -52,7 +52,6 @@ export function OrderPlaceModal() {
     openGiveReviewModal();
   }
 
-  // todo
   useEffect(() => {
     if (searchParams.get("success")) {
       try {

@@ -1,10 +1,15 @@
 import { Restaurant, ensureDbConnection } from "db";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { restauantType } from "validation";
+import { authOptions } from "../auth/[...nextauth]/options";
 
 export async function GET(request: NextRequest) {
   try {
     await ensureDbConnection();
+
+    // just so that get data is not cached
+    const session = await getServerSession(authOptions);
 
     //get all the restaurant data
     const rawRestaurants: restauantType[] =

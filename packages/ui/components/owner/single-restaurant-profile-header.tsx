@@ -38,7 +38,7 @@ export function SingleRestaurantProfileHeader({
       }}
     >
       <div>
-        <div className="flex items-center space-x-2 ">
+        <div className="flex items-center sm:space-x-2 ">
           <img
             src={profilePicture}
             alt="user profile image"
@@ -48,7 +48,7 @@ export function SingleRestaurantProfileHeader({
             <div className="font-semibold text-xl sm:text-2xl sm:py-2">
               {restaurantName}
             </div>
-            <div className="text-sm py-1">{description}</div>
+            <div className="hidden sm:block text-sm py-1">{description}</div>
             <ViewStarRating rating={rating} />
           </div>
         </div>

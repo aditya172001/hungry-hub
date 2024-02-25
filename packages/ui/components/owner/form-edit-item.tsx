@@ -8,6 +8,8 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Switch } from "@headlessui/react";
 import { courseType, cuisineType } from "validation";
+import { isProgressBarVisibleState } from "store";
+import { useSetRecoilState } from "recoil";
 
 export function FormEditItem({
   erroricon,
@@ -30,6 +32,7 @@ export function FormEditItem({
   const [veg, setVeg] = useState(true);
 
   const [myerror, setMyerror] = useState("");
+  const setIsProgressBarVisible = useSetRecoilState(isProgressBarVisibleState);
 
   async function fetchItemData() {
     try {
@@ -70,6 +73,7 @@ export function FormEditItem({
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsProgressBarVisible(true);
     try {
       const response = await axios.put(`/api/owner/restaurants/menu`, {
         itemID,
@@ -98,7 +102,9 @@ export function FormEditItem({
       } else {
         setMyerror("Internal Server error");
       }
-      // fetchRestaurantData();
+      fetchItemData();
+    } finally {
+      setIsProgressBarVisible(false);
     }
   }
 

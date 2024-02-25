@@ -15,18 +15,30 @@ export const restaurantIdSchema = z.string();
 export type restaurantIdType = z.infer<typeof restaurantIdSchema>;
 
 //used in api/owner/restaurants/[restaurantid](PUT)
-export const nameSchema = z.string().optional();
+export const nameSchema = z
+  .string()
+  .min(3, { message: "Name must be at least 3 characters long" })
+  .max(30, { message: "Name cannot exceed 30 characters" })
+  .optional();
 export type nameType = z.infer<typeof nameSchema>;
 
-export const descriptionSchema = z.string().optional();
+export const descriptionSchema = z
+  .string()
+  .min(3, { message: "Description must be at least 3 characters long" })
+  .max(80, { message: "Description cannot exceed 80 characters" })
+  .optional();
 export type descriptionType = z.infer<typeof descriptionSchema>;
 
 export const profilePictureSchema = imageUrlSchema.optional();
 export type profilePictureType = z.infer<typeof profilePictureSchema>;
 
 export const openingHoursSchema = z.object({
-  open: z.string().max(15),
-  close: z.string().max(15),
+  open: z.string().regex(/^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/i, {
+    message: "Invalid time format (hh:mm AM/PM)",
+  }),
+  close: z.string().regex(/^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/i, {
+    message: "Invalid time format (hh:mm AM/PM)",
+  }),
 });
 export type openingHoursType = z.infer<typeof openingHoursSchema>;
 
@@ -38,14 +50,11 @@ export type nightlifeType = z.infer<typeof nightlifeSchema>;
 
 //used in api/owner/restaurants(POST)
 export const restaurantSchema = z.object({
-  restaurantName: z.string(),
-  description: z.string(),
+  restaurantName: z.string().min(3).max(30),
+  description: z.string().min(3).max(80),
   profilePicture: imageUrlSchema,
   address: addressSchema,
-  openingHours: z.object({
-    open: z.string(),
-    close: z.string(),
-  }),
+  openingHours: openingHoursSchema,
   dining: z.boolean(),
   nightlife: z.boolean(),
 });

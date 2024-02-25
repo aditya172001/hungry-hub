@@ -5,8 +5,10 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
+import { useSetRecoilState } from "recoil";
+import { isProgressBarVisibleState } from "store";
 
-export function FormSingup({
+export function FormSignup({
   googleicon,
   erroricon,
 }: {
@@ -21,9 +23,11 @@ export function FormSingup({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [myerror, setMyerror] = useState("");
+  const setIsProgressBarVisible = useSetRecoilState(isProgressBarVisibleState);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsProgressBarVisible(true);
     try {
       const response = await axios.post("/api/signup", {
         userName,
@@ -47,6 +51,8 @@ export function FormSingup({
       setUserName("");
       setEmail("");
       setPassword("");
+    } finally {
+      setIsProgressBarVisible(false);
     }
   }
 
@@ -60,7 +66,7 @@ export function FormSingup({
   }
 
   return (
-    <div className="">
+    <>
       <form className="flex flex-col items-start" onSubmit={handleSubmit}>
         <label className="text-sm py-1">Username</label>
         <input
@@ -133,6 +139,6 @@ export function FormSingup({
           Signin
         </a>
       </div>
-    </div>
+    </>
   );
 }

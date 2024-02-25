@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Switch } from "@headlessui/react";
 import { useParams } from "next/navigation";
 import { RestaurantInfoType } from "types";
+import { isProgressBarVisibleState } from "store";
+import { useSetRecoilState } from "recoil";
 
 export function FormUpdateRestaurant({
   erroricon,
@@ -34,6 +36,7 @@ export function FormUpdateRestaurant({
   const [nightlife, setNightlife] = useState(false);
 
   const [myerror, setMyerror] = useState("");
+  const setIsProgressBarVisible = useSetRecoilState(isProgressBarVisibleState);
 
   async function fetchRestaurantData() {
     try {
@@ -66,6 +69,7 @@ export function FormUpdateRestaurant({
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsProgressBarVisible(true);
     try {
       const response = await axios.put(
         `/api/owner/restaurants/${restaurantID}`,
@@ -96,6 +100,8 @@ export function FormUpdateRestaurant({
         setMyerror("Internal Server error");
       }
       fetchRestaurantData();
+    } finally {
+      setIsProgressBarVisible(false);
     }
   }
 
@@ -244,7 +250,7 @@ export function FormUpdateRestaurant({
             <span className="sr-only">Use setting</span>
             <span
               aria-hidden="true"
-              className={`${dining ? "translate-x-5" : "translate-x-0"}
+              className={`${dining ? "translate-x-5 sm:translate-x-6" : "translate-x-0"}
               pointer-events-none inline-block h-4 sm:h-5 w-4 sm:w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
             />
           </Switch>
@@ -260,7 +266,7 @@ export function FormUpdateRestaurant({
             <span className="sr-only">Use setting</span>
             <span
               aria-hidden="true"
-              className={`${nightlife ? "translate-x-5" : "translate-x-0"}
+              className={`${nightlife ? "translate-x-5 sm:translate-x-6" : "translate-x-0"}
               pointer-events-none inline-block h-4 sm:h-5 w-4 sm:w-5 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
             />
           </Switch>

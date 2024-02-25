@@ -13,6 +13,7 @@ import {
   vegType,
 } from "validation";
 import { headers } from "next/headers";
+import { ZodError } from "zod";
 
 //get a dish info
 export async function GET(request: NextRequest, context: any) {
@@ -69,8 +70,17 @@ export async function POST(request: NextRequest) {
     try {
       parsedItem = await itemPostSchema.parseAsync(rawItem);
     } catch (error) {
+      if (error instanceof ZodError) {
+        return NextResponse.json(
+          {
+            status: "error",
+            message: error.errors[0].message,
+          },
+          { status: 400 }
+        );
+      }
       return NextResponse.json(
-        { status: "error", message: "Invalid input" },
+        { status: "error", message: "Invalid Input" },
         { status: 400 }
       );
     }
@@ -165,8 +175,17 @@ export async function PUT(request: NextRequest) {
     try {
       parsedItem = await itemPutSchema.parseAsync(rawItem);
     } catch (error) {
+      if (error instanceof ZodError) {
+        return NextResponse.json(
+          {
+            status: "error",
+            message: error.errors[0].message,
+          },
+          { status: 400 }
+        );
+      }
       return NextResponse.json(
-        { status: "error", message: "Invalid input" },
+        { status: "error", message: "Invalid Input" },
         { status: 400 }
       );
     }
