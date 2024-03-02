@@ -1,6 +1,6 @@
 # Hungry Hub
 
-Hungry Hub is a food discovery platform, inspired by applications like Zomato, that allows users to explore, discover, and interact with various restaurants, cuisines, and menus. Users can browse restaurants, place orders, leave reviews, update their profiles, and engage in various features related to food discovery and delivery. Moreover, users can also act as restaurant owners, adding and managing their own restaurants within the platform.
+Hungry Hub is a Zomato clone, that allows users to explore, discover, and interact with various restaurants, cuisines, and menus. Users can browse restaurants, place orders, leave reviews, update their profiles, and engage in various features related to food discovery and delivery. Moreover, users can also act as restaurant owners, adding and managing their own restaurants within the platform.
 
 ## Table of Contents
 
